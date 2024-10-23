@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Réseau Social</title>
+    <title>Conversation</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header>
-        <h1>Mon Réseau Social</h1>
+        <h1>Conversation</h1>
         <nav>
             <a href="index.html">Feed</a>
             <a href="messagerie.html">Messagerie</a>
@@ -18,11 +18,15 @@
         </nav>
     </header>
 
-    <main id="feed">
-        <section class="posts"></section>
+    <main id="conversation">
+        <section class="messages">
+            <!-- Les messages de la conversation vont apparaître ici -->
+        </section>
+        <input type="text" id="new-message" placeholder="Écrire un message...">
+        <button id="send-message">Envoyer</button>
     </main>
 
-    <script src="js/main.js"></script>
+    <script src="js/conversation.js"></script>
 </body>
 
 </html>

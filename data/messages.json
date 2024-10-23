@@ -1,0 +1,36 @@
+[
+  {
+    "conversation_id": 1,
+    "participants": ["John", "Jane"],
+    "last_message": "Salut, comment ça va ?",
+    "messages": [
+      {
+        "sender": "John",
+        "content": "Salut, comment ça va ?",
+        "timestamp": "2024-10-22 10:30"
+      },
+      {
+        "sender": "Jane",
+        "content": "Très bien, merci !",
+        "timestamp": "2024-10-22 10:31"
+      }
+    ]
+  },
+  {
+    "conversation_id": 2,
+    "participants": ["Alice", "Bob"],
+    "last_message": "On se retrouve où ?",
+    "messages": [
+      {
+        "sender": "Alice",
+        "content": "On se retrouve où ?",
+        "timestamp": "2024-10-22 09:15"
+      },
+      {
+        "sender": "Bob",
+        "content": "Devant le café à 10h.",
+        "timestamp": "2024-10-22 09:17"
+      }
+    ]
+  }
+]
