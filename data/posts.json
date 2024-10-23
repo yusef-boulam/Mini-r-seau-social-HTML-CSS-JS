@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "author": "John Doe",
+    "text": "Ceci est un post exemple.",
+    "image": "https://via.placeholder.com/150",
+    "likes": 10,
+    "dislikes": 2,
+    "loves": 5,
+    "comments": [{ "author": "Jane Doe", "text": "Super post!" }]
+  },
+  {
+    "id": 2,
+    "author": "Alice",
+    "text": "Un autre post ici !",
+    "image": "",
+    "likes": 15,
+    "dislikes": 0,
+    "loves": 8,
+    "comments": [{ "author": "Bob", "text": "Excellent travail" }]
+  }
+]

@@ -1,0 +1,42 @@
+/* Style de base */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f3;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    padding: 1rem;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Neumorphisme */
+.posts {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 600px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+}
+
+.post {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f0f0f3;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+}
