@@ -1,0 +1,44 @@
+/* Styles pour la page Liste d'Amis */
+#friend-search {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.friend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: grab;
+    transition: box-shadow 0.2s ease;
+}
+
+.friend:hover {
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.friend:active {
+    cursor: grabbing;
+}
+
+.friend a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.friend a:hover {
+    text-decoration: underline;
+}

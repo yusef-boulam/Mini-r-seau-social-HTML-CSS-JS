@@ -1,0 +1,36 @@
+/* Styles pour la page Feed */
+.posts {
+    margin-top: 20px;
+}
+
+.post {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f0f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.reactions {
+    margin-top: 10px;
+}
+
+.comment-list {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

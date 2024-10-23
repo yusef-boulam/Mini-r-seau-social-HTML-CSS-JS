@@ -1,0 +1,55 @@
+/* Styles pour la page Messagerie */
+.conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Conteneur principal pour les conversations */
+.conversations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centrer les éléments horizontalement */
+    padding: 20px;
+}
+
+/* Style pour chaque conversation */
+.conversation {
+    width: 80%;
+    /* Limiter la largeur des conversations */
+    max-width: 600px;
+    /* Largeur maximale des discussions */
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f0f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.conversation h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.conversation p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.conversation a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.conversation a:hover {
+    text-decoration: underline;
+}
+
+/* Effet au survol */
+.conversation:hover {
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+}

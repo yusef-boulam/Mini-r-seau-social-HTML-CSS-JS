@@ -1,35 +1,49 @@
 [
   {
     "conversation_id": 1,
-    "participants": ["John", "Jane"],
-    "last_message": "Salut, comment ça va ?",
+    "participants": ["Vous", "John Doe"],
     "messages": [
       {
-        "sender": "John",
+        "sender": "John Doe",
         "content": "Salut, comment ça va ?",
         "timestamp": "2024-10-22 10:30"
       },
       {
-        "sender": "Jane",
-        "content": "Très bien, merci !",
-        "timestamp": "2024-10-22 10:31"
+        "sender": "Vous",
+        "content": "Ça va bien, merci !",
+        "timestamp": "2024-10-22 10:32"
       }
     ]
   },
   {
     "conversation_id": 2,
-    "participants": ["Alice", "Bob"],
-    "last_message": "On se retrouve où ?",
+    "participants": ["Vous", "Jane Doe"],
+    "messages": [
+      {
+        "sender": "Jane Doe",
+        "content": "Tu viens à la réunion demain ?",
+        "timestamp": "2024-10-21 14:00"
+      },
+      {
+        "sender": "Vous",
+        "content": "Oui, à quelle heure ?",
+        "timestamp": "2024-10-21 14:10"
+      }
+    ]
+  },
+  {
+    "conversation_id": 3,
+    "participants": ["Vous", "Alice"],
     "messages": [
       {
         "sender": "Alice",
-        "content": "On se retrouve où ?",
-        "timestamp": "2024-10-22 09:15"
+        "content": "N'oublie pas le projet pour lundi.",
+        "timestamp": "2024-10-20 09:15"
       },
       {
-        "sender": "Bob",
-        "content": "Devant le café à 10h.",
-        "timestamp": "2024-10-22 09:17"
+        "sender": "Vous",
+        "content": "Pas de souci, je suis dessus.",
+        "timestamp": "2024-10-20 09:18"
       }
     ]
   }
