@@ -40,23 +40,30 @@ fetch('data/posts.json')
             postElement.classList.add('post');
 
             postElement.innerHTML = `
-          <h2>${post.author}</h2>
-          <p>${post.text}</p>
-          ${post.image ? `<img src="./images/${post.image}"  alt="Image du post" class="post-image">` : ''}
-          <div class="reactions">
-            <button class="reaction-btn love-btn">❤️ Love (${post.loves})</button>
-            <button class="reaction-btn like-btn">👍 Like (${post.likes})</button>
-            <button class="reaction-btn dislike-btn">👎 Dislike (${post.dislikes})</button>
-          </div>
-          <div class="comments">
-            <h3>Commentaires</h3>
-            <ul class="comment-list">
-              ${post.comments.map(comment => `<li><strong>${comment.author}:</strong> ${comment.text}</li>`).join('')}
-            </ul>
-            <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
-            <button class="comment-btn">Commenter</button>
-          </div>
-        `;
+            <div class="post-header">
+              <img src="./images/profils/${post.profilePicture}" alt="Profile Picture" class="profile-pic">
+              <h2>${post.author}</h2>
+            </div>
+            <p>${post.text}</p>
+            ${post.image ? `<img src="./images/posts/${post.image}" alt="Image du post" class="post-image">` : ''}
+            <div class="reactions">
+              <button class="reaction-btn love-btn">❤️ Love (${post.loves})</button>
+              <button class="reaction-btn like-btn">👍 Like (${post.likes})</button>
+              <button class="reaction-btn dislike-btn">👎 Dislike (${post.dislikes})</button>
+            </div>
+            <div class="comments">
+              <h3>Commentaires</h3>
+              <ul class="comment-list">
+                ${post.comments.map(comment => `
+                  <li>
+                    <img src="./images/profils/${comment.profilePicture}" alt="Profile Picture" class="profile-pic-comment">
+                    <strong>${comment.author}:</strong> ${comment.text}
+                  </li>`).join('')}
+              </ul>
+              <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
+              <button class="comment-btn">Commenter</button>
+            </div>
+          `;
 
             postsContainer.appendChild(postElement);
 
@@ -130,7 +137,7 @@ fetch('data/posts.json')
                     newComment.innerHTML = `<strong>Vous:</strong> ${commentText}`;
                     commentList.appendChild(newComment);
                     commentInput.value = "";
-                    post.comments.push({ author: "Vous", text: commentText });
+                    post.comments.push({ author: "Vous", profilePicture: "Vous.webp", text: commentText });
                 }
             });
         });

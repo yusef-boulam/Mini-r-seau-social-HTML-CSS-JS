@@ -1,11 +1,10 @@
 // Liste d'amis codée en dur avec photos de profil
 const friends = [
-    { id: 1, name: "John Doe", profilePicture: "https://randomuser.me/api/portraits/men/1.jpg" },
-    { id: 2, name: "Jane Doe", profilePicture: "https://randomuser.me/api/portraits/women/2.jpg" },
+    { id: 1, name: "John", profilePicture: "https://randomuser.me/api/portraits/men/1.jpg" },
+    { id: 2, name: "Jane", profilePicture: "https://randomuser.me/api/portraits/women/2.jpg" },
     { id: 3, name: "Alice", profilePicture: "https://randomuser.me/api/portraits/women/3.jpg" },
     { id: 4, name: "Bob", profilePicture: "https://randomuser.me/api/portraits/men/4.jpg" }
 ];
-
 
 // Afficher la liste d'amis
 const friendListContainer = document.querySelector('.friend-list');

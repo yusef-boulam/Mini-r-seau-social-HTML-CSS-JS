@@ -34,3 +34,24 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic-comment {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}

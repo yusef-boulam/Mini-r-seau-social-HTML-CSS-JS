@@ -1,24 +1,32 @@
 [
   {
     "id": 1,
-    "author": "John Doe",
+    "author": "John",
     "text": "Ceci est un post exemple.",
     "image": "post1.jpg",
-    "profilePicture": "profile1.jpg",
+    "profilePicture": "John.webp",
     "likes": 10,
     "dislikes": 2,
     "loves": 5,
-    "comments": [{ "author": "Jane Doe", "text": "Super post!" }]
+    "comments": [
+      { "author": "Jane", "profilePicture": "Jane.webp", "text": "Super post!" }
+    ]
   },
   {
     "id": 2,
     "author": "Alice",
     "text": "Un autre post ici !",
     "image": "post2.jpg",
-    "profilePicture": "profile2.jpg",
+    "profilePicture": "Alice.webp",
     "likes": 15,
     "dislikes": 0,
     "loves": 8,
-    "comments": [{ "author": "Bob", "text": "Excellent travail" }]
+    "comments": [
+      {
+        "author": "Bob",
+        "profilePicture": "Bob.webp",
+        "text": "Excellent travail"
+      }
+    ]
   }
 ]

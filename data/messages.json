@@ -1,15 +1,17 @@
 [
   {
     "conversation_id": 1,
-    "participants": ["Vous", "John Doe"],
+    "participants": ["Vous", "John"],
     "messages": [
       {
-        "sender": "John Doe",
+        "sender": "John",
+        "profilePicture": "John.webp",
         "content": "Salut, comment ça va ?",
         "timestamp": "2024-10-22 10:30"
       },
       {
         "sender": "Vous",
+        "profilePicture": "Vous.webp",
         "content": "Ça va bien, merci !",
         "timestamp": "2024-10-22 10:32"
       }
@@ -17,15 +19,17 @@
   },
   {
     "conversation_id": 2,
-    "participants": ["Vous", "Jane Doe"],
+    "participants": ["Vous", "Jane"],
     "messages": [
       {
-        "sender": "Jane Doe",
+        "sender": "Jane",
+        "profilePicture": "Jane.webp",
         "content": "Tu viens à la réunion demain ?",
         "timestamp": "2024-10-21 14:00"
       },
       {
         "sender": "Vous",
+        "profilePicture": "Vous.webp",
         "content": "Oui, à quelle heure ?",
         "timestamp": "2024-10-21 14:10"
       }
@@ -37,11 +41,13 @@
     "messages": [
       {
         "sender": "Alice",
+        "profilePicture": "Alice.webp",
         "content": "N'oublie pas le projet pour lundi.",
         "timestamp": "2024-10-20 09:15"
       },
       {
         "sender": "Vous",
+        "profilePicture": "Vous.webp",
         "content": "Pas de souci, je suis dessus.",
         "timestamp": "2024-10-20 09:18"
       }
