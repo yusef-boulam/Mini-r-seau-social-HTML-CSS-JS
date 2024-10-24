@@ -9,7 +9,7 @@ fetch('data/messages.json')
         // Rechercher une conversation existante avec cet ami
         let conversation = conversations.find(conv => conv.participants.includes(friendName) && conv.participants.length === 2);
 
-        // Si aucune conversation n'existe, en créer une nouvelle (sans sauvegarde dans localStorage)
+        // Si aucune conversation n'existe, en créer une nouvelle
         if (!conversation) {
             conversation = {
                 conversation_id: Date.now(),
@@ -62,16 +62,14 @@ fetch('data/messages.json')
             const newMessageElement = document.createElement('div');
             newMessageElement.classList.add('message', 'user-message');
 
-            // Chemin de l'image de profil de l'utilisateur "Vous"
-            const userProfilePic = "Vous.webp"; // Chemin vers l'image de profil de l'utilisateur
-
+            // Ajout de l'image de profil avec le message
             newMessageElement.innerHTML = `
-                <img src="./images/profils/${userProfilePic}" alt="Vous" class="profile-pic">
-                <div class="message-content">
-                    <p><strong>Vous:</strong> ${newMessageContent.replace(/\n/g, '<br>')}</p>
-                    <small>${new Date().toLocaleString()}</small>
-                </div>
-            `;
+        <img src="./images/profils/Vous.webp" alt="Vous" class="profile-pic">
+        <div class="message-content">
+            <p><strong>Vous:</strong> ${newMessageContent.replace(/\n/g, '<br>')}</p>
+            <small>${new Date().toLocaleString()}</small>
+        </div>
+    `;
 
             messagesContainer.appendChild(newMessageElement);
             newMessageInput.value = ""; // Effacer le champ après l'envoi

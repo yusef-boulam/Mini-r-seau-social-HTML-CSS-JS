@@ -53,11 +53,6 @@
     align-self: flex-end;
 }
 
-.message.user-message img {
-    display: none;
-    /* Pas besoin d'afficher sa propre image */
-}
-
 /* Style pour le champ de texte */
 #new-message {
     width: calc(100% - 80px);
