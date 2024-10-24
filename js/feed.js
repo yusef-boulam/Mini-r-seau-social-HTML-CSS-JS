@@ -134,7 +134,9 @@ fetch('data/posts.json')
                 const commentText = commentInput.value.trim();
                 if (commentText !== "") {
                     const newComment = document.createElement('li');
-                    newComment.innerHTML = `<strong>Vous:</strong> ${commentText}`;
+                    newComment.innerHTML = `
+            <img src="./images/profils/Vous.webp" alt="Profile Picture" class="profile-pic-comment">
+                    <strong>Vous:</strong> ${commentText}`;
                     commentList.appendChild(newComment);
                     commentInput.value = "";
                     post.comments.push({ author: "Vous", profilePicture: "Vous.webp", text: commentText });
