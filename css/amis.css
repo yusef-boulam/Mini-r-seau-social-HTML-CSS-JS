@@ -72,3 +72,31 @@
     border: 2px dashed #007bff;
     background-color: #e9f5ff;
 }
+
+
+/* Style pour la photo de profil */
+
+.friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.friend-info {
+    display: flex;
+    align-items: center;
+}
+
+.friend-profile-pic {
+    width: 40px;
+    /* Ajuste la taille comme nécessaire */
+    height: 40px;
+    border-radius: 50%;
+    /* Rend l'image ronde pour un effet de profil */
+    margin-right: 10px;
+    /* Un peu d'espacement avec le nom */
+    object-fit: cover;
+    /* Garde l'image bien ajustée */
+}

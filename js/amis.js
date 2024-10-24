@@ -1,37 +1,50 @@
-// Liste d'amis codée en dur avec photos de profil
+// Liste d'amis codée en dur avec photos de profil chargées localement et liens vers la messagerie
 const friends = [
-    { id: 1, name: "John", profilePicture: "https://randomuser.me/api/portraits/men/1.jpg" },
-    { id: 2, name: "Jane", profilePicture: "https://randomuser.me/api/portraits/women/2.jpg" },
-    { id: 3, name: "Alice", profilePicture: "https://randomuser.me/api/portraits/women/3.jpg" },
-    { id: 4, name: "Bob", profilePicture: "https://randomuser.me/api/portraits/men/4.jpg" }
+    { id: 1, name: "John", profilePicture: "./images/profils/john.webp", messageLink: "conversation.html?friend=John" },
+    { id: 2, name: "Jane", profilePicture: "./images/profils/jane.webp", messageLink: "conversation.html?friend=Jane" },
+    { id: 3, name: "Alice", profilePicture: "./images/profils/alice.webp", messageLink: "conversation.html?friend=Alice" },
+    { id: 4, name: "Bob", profilePicture: "./images/profils/bob.webp", messageLink: "conversation.html?friend=Bob" }
 ];
 
 // Afficher la liste d'amis
 const friendListContainer = document.querySelector('.friend-list');
+const friendSearchInput = document.getElementById('friend-search');
 
-function displayFriends() {
-    friendListContainer.innerHTML = '';
+// Fonction pour afficher les amis (avec un filtre optionnel)
+function displayFriends(filter = '') {
+    friendListContainer.innerHTML = ''; // Réinitialiser la liste des amis
 
     // Parcourir les amis et les ajouter à la page
-    friends.forEach(friend => {
-        const friendElement = document.createElement('div');
-        friendElement.classList.add('friend');
-        friendElement.setAttribute('draggable', 'true'); // Rendre chaque ami "draggable"
-        friendElement.dataset.id = friend.id; // Ajouter un identifiant pour chaque ami
+    friends
+        .filter(friend => friend.name.toLowerCase().includes(filter.toLowerCase())) // Filtrer les amis
+        .forEach(friend => {
+            const friendElement = document.createElement('div');
+            friendElement.classList.add('friend');
+            friendElement.setAttribute('draggable', 'true'); // Rendre chaque ami "draggable"
+            friendElement.dataset.id = friend.id; // Ajouter un identifiant pour chaque ami
 
-        // HTML de l'ami avec lien vers la messagerie
-        friendElement.innerHTML = `
-        <p>${friend.name}</p>
-        <a href="${friend.messageLink}">Envoyer un message</a>
-      `;
+            // HTML de l'ami avec la photo de profil à côté du nom et le lien vers la messagerie
+            friendElement.innerHTML = `
+                <div class="friend-info">
+                    <img src="${friend.profilePicture}" alt="Photo de ${friend.name}" class="friend-profile-pic">
+                    <p>${friend.name}</p>
+                </div>
+                <a href="${friend.messageLink}">Envoyer un message</a>
+            `;
 
-        // Ajouter l'élément à la liste
-        friendListContainer.appendChild(friendElement);
+            // Ajouter l'élément à la liste
+            friendListContainer.appendChild(friendElement);
 
-        // Ajouter les événements de drag and drop
-        addDragAndDropEvents(friendElement);
-    });
+            // Ajouter les événements de drag and drop
+            addDragAndDropEvents(friendElement);
+        });
 }
+
+// Fonction de filtrage
+friendSearchInput.addEventListener('input', (event) => {
+    const searchValue = event.target.value;
+    displayFriends(searchValue); // Filtrer les amis en fonction du texte saisi
+});
 
 let draggedFriend = null; // Garde la référence de l'ami en train d'être déplacé
 
@@ -81,5 +94,5 @@ function addDragAndDropEvents(friendElement) {
     });
 }
 
-// Afficher la liste au chargement de la page
+// Afficher la liste des amis au chargement de la page
 displayFriends();

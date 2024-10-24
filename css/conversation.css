@@ -91,3 +91,41 @@
     align-items: center;
     margin-top: 20px;
 }
+
+
+/* style pour la photo de profil */
+
+.profile-pic {
+    width: 50px;
+    /* Taille suffisante pour être visible */
+    height: 50px;
+    border-radius: 50%;
+    /* Arrondi pour un effet de profil */
+    display: block;
+    /* S'assurer que l'image n'est pas cachée */
+    visibility: visible;
+    /* S'assurer qu'elle est visible */
+    object-fit: cover;
+    /* Ajuster l'image si nécessaire */
+    background-color: transparent;
+    /* Pas d'arrière-plan bloquant */
+}
+
+
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.message-content {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 60%;
+}

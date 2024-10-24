@@ -9,6 +9,9 @@ fetch('data/messages.json')
             // Récupérer l'ami (autre que "Vous")
             const friendName = conversation.participants.find(participant => participant !== "Vous");
 
+            // Récupérer la photo de profil de l'ami à partir du dernier message envoyé par lui
+            const friendProfilePic = conversation.messages.find(msg => msg.sender === friendName).profilePicture;
+
             // Récupérer le dernier message de la conversation
             const lastMessage = conversation.messages[conversation.messages.length - 1];
 
@@ -16,12 +19,17 @@ fetch('data/messages.json')
             const conversationElement = document.createElement('div');
             conversationElement.classList.add('conversation');
 
-            // Afficher les participants et le dernier message
+            // Afficher les participants avec la photo de profil et le dernier message
             conversationElement.innerHTML = `
-        <h2>${friendName}</h2>
-        <p>Dernier message : <strong>${lastMessage.sender}:</strong> ${lastMessage.content}</p>
-        <a href="conversation.html?friend=${encodeURIComponent(friendName)}">Voir la conversation</a>
-      `;
+                <div class="conversation-header">
+                    <img src="./images/profils/${friendProfilePic}" alt="${friendName} Profile Picture" class="profile-pic">
+                    <div>
+                        <h2>${friendName}</h2>
+                        <p>Dernier message : <strong>${lastMessage.sender}:</strong> ${lastMessage.content}</p>
+                    </div>
+                </div>
+                <a href="conversation.html?friend=${encodeURIComponent(friendName)}">Voir la conversation</a>
+            `;
 
             conversationsContainer.appendChild(conversationElement);
         });

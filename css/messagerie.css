@@ -53,3 +53,33 @@
 .conversation:hover {
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Styles pour la photo de profil */
+
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* Pour arrondir l'image */
+    object-fit: cover;
+    /* Pour que l'image soit bien ajustée */
+    margin-right: 10px;
+}
+
+.conversation-header {
+    display: flex;
+    align-items: center;
+}
+
+.conversation-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.conversation-header p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}

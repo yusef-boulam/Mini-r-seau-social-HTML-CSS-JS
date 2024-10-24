@@ -6,13 +6,13 @@ const friendName = urlParams.get('friend');
 fetch('data/messages.json')
     .then(response => response.json())
     .then(conversations => {
-        // Rechercher une conversation existante avec cet ami, ou en créer une nouvelle
+        // Rechercher une conversation existante avec cet ami
         let conversation = conversations.find(conv => conv.participants.includes(friendName) && conv.participants.length === 2);
 
+        // Si aucune conversation n'existe, en créer une nouvelle (sans sauvegarde dans localStorage)
         if (!conversation) {
-            // Si aucune conversation n'existe, on en crée une nouvelle
             conversation = {
-                conversation_id: Date.now(),  // Générer un ID unique
+                conversation_id: Date.now(),
                 participants: ["Vous", friendName],
                 messages: []
             };
@@ -30,19 +30,19 @@ fetch('data/messages.json')
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
 
-            // Si c'est un message de l'utilisateur, ajouter une classe spécifique
+            // Si c'est un message de l'utilisateur "Vous", ajouter une classe spécifique
             if (message.sender === "Vous") {
                 messageElement.classList.add('user-message');
             }
 
             // Ajouter l'image de profil, le contenu du message et l'horodatage
             messageElement.innerHTML = `
-        <img src="https://via.placeholder.com/40" alt="${message.sender}">
-        <div class="message-content">
-          <p><strong>${message.sender}:</strong> ${message.content}</p>
-          <small>${message.timestamp}</small>
-        </div>
-      `;
+                <img src="./images/profils/${message.profilePicture}" alt="${message.sender}" class="profile-pic">
+                <div class="message-content">
+                  <p><strong>${message.sender}:</strong> ${message.content}</p>
+                  <small>${message.timestamp}</small>
+                </div>
+            `;
 
             messagesContainer.appendChild(messageElement);
         });
@@ -54,18 +54,38 @@ fetch('data/messages.json')
         // Fonction d'envoi de message
         function sendMessage() {
             const newMessageContent = newMessageInput.value.trim();
-            if (newMessageContent !== "") {
-                const newMessageElement = document.createElement('div');
-                newMessageElement.classList.add('message', 'user-message');
-                newMessageElement.innerHTML = `
-          <div class="message-content">
-            <p><strong>Vous:</strong> ${newMessageContent.replace(/\n/g, '<br>')}</p>
-            <small>${new Date().toLocaleString()}</small>
-          </div>
-        `;
-                messagesContainer.appendChild(newMessageElement);
-                newMessageInput.value = ""; // Effacer le champ après l'envoi
+            if (newMessageContent === "") {
+                alert("Le message ne peut pas être vide !");
+                return;
             }
+
+            const newMessageElement = document.createElement('div');
+            newMessageElement.classList.add('message', 'user-message');
+
+            // Chemin de l'image de profil de l'utilisateur "Vous"
+            const userProfilePic = "Vous.webp"; // Chemin vers l'image de profil de l'utilisateur
+
+            newMessageElement.innerHTML = `
+                <img src="./images/profils/${userProfilePic}" alt="Vous" class="profile-pic">
+                <div class="message-content">
+                    <p><strong>Vous:</strong> ${newMessageContent.replace(/\n/g, '<br>')}</p>
+                    <small>${new Date().toLocaleString()}</small>
+                </div>
+            `;
+
+            messagesContainer.appendChild(newMessageElement);
+            newMessageInput.value = ""; // Effacer le champ après l'envoi
+
+            // Défilement automatique vers le bas pour voir le nouveau message
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Ajouter le nouveau message à la conversation (en mémoire pour cette session)
+            conversation.messages.push({
+                sender: "Vous",
+                content: newMessageContent,
+                timestamp: new Date().toLocaleString(),
+                profilePicture: "Vous.webp"
+            });
         }
 
         // Envoi du message avec le bouton "Envoyer"
@@ -77,6 +97,7 @@ fetch('data/messages.json')
         newMessageInput.addEventListener('keypress', (event) => {
             if (event.key === "Enter" && !event.shiftKey) {
                 event.preventDefault(); // Empêcher l'envoi avec "Entrée"
+                sendMessage(); // Envoyer le message
             }
         });
     })
