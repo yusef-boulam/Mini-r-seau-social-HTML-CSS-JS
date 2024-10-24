@@ -42,7 +42,7 @@ fetch('data/posts.json')
             postElement.innerHTML = `
           <h2>${post.author}</h2>
           <p>${post.text}</p>
-          ${post.image ? `<img src="${post.image}" alt="Image du post" class="post-image">` : ''}
+          ${post.image ? `<img src="./images/${post.image}"  alt="Image du post" class="post-image">` : ''}
           <div class="reactions">
             <button class="reaction-btn love-btn">❤️ Love (${post.loves})</button>
             <button class="reaction-btn like-btn">👍 Like (${post.likes})</button>
