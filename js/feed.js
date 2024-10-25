@@ -1,33 +1,32 @@
 // Fonction pour créer des particules autour du bouton cliqué
 function createParticles(button, emoji) {
-    const particle = document.createElement('span');
-    particle.textContent = emoji;
-    particle.style.position = 'absolute';
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('span');
+        particle.textContent = emoji;
+        particle.style.position = 'absolute';
 
-    // Calculer la position du bouton cliqué
-    const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX;  // Position horizontale
-    const y = buttonRect.top + window.scrollY;   // Position verticale
+        const buttonRect = button.getBoundingClientRect();
+        const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 10;
+        const y = buttonRect.top + window.scrollY;
 
-    // Position initiale des particules près du bouton cliqué
-    particle.style.left = `${x + (buttonRect.width / 2) - 10}px`; // Centrer autour du bouton
-    particle.style.top = `${y}px`; // Position verticale au niveau du bouton
-    particle.style.opacity = 1;
-    particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.opacity = 1;
+        particle.style.transition = `transform 1s ease-out, opacity 1s ease-out`;
 
-    // Ajouter la particule au body
-    document.body.appendChild(particle);
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 50;
 
-    // Animation : déplacement vers le haut et réduction d'opacité
-    particle.style.transform = `translateY(-50px)`;
+        particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * -distance}px)`;
 
-    // Supprimer la particule après l'animation
-    setTimeout(() => {
-        particle.style.opacity = 0;
-        particle.remove();
-    }, 1000);
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+            particle.style.opacity = 0;
+            particle.remove();
+        }, 1000);
+    }
 }
-
 
 // Charger les posts à partir du JSON
 fetch('data/posts.json')
@@ -47,9 +46,9 @@ fetch('data/posts.json')
             <p>${post.text}</p>
             ${post.image ? `<img src="./images/posts/${post.image}" alt="Image du post" class="post-image">` : ''}
             <div class="reactions">
-              <button class="reaction-btn love-btn">❤️ Love (${post.loves})</button>
-              <button class="reaction-btn like-btn">👍 Like (${post.likes})</button>
-              <button class="reaction-btn dislike-btn">👎 Dislike (${post.dislikes})</button>
+              <button class="reaction-btn love-btn">❤️ ${post.loves}</button>
+              <button class="reaction-btn like-btn">👍 ${post.likes}</button>
+              <button class="reaction-btn dislike-btn">👎 ${post.dislikes}</button>
             </div>
             <div class="comments">
               <h3>Commentaires</h3>
@@ -67,63 +66,47 @@ fetch('data/posts.json')
 
             postsContainer.appendChild(postElement);
 
-            // État des réactions pour ce post
-            let currentReaction = null; // Peut être 'like', 'dislike' ou 'love'
+            let currentReaction = null;
 
             // Sélectionner les boutons de réaction
             const loveBtn = postElement.querySelector('.love-btn');
             const likeBtn = postElement.querySelector('.like-btn');
             const dislikeBtn = postElement.querySelector('.dislike-btn');
 
-            // Ajouter les événements de clics
-            loveBtn.addEventListener('click', () => {
-                if (currentReaction === 'love') {
-                    post.loves -= 1;
-                    loveBtn.innerHTML = `❤️ Love (${post.loves})`;
-                    currentReaction = null;
-                    resetButtons(likeBtn, dislikeBtn);
-                } else {
-                    if (currentReaction) updateReactionCount(currentReaction, post, -1);
-                    post.loves += 1;
-                    loveBtn.innerHTML = `❤️ Love (${post.loves})`;
-                    createParticles(loveBtn, '❤️');  // Appel avec le bouton cliqué
-                    currentReaction = 'love';
-                    disableOtherReactions(likeBtn, dislikeBtn);
-                }
-            });
+            // Ajouter les événements de clics pour gérer la sélection et désélection
+            loveBtn.addEventListener('click', () => handleReaction(loveBtn, post, 'love', '❤️'));
+            likeBtn.addEventListener('click', () => handleReaction(likeBtn, post, 'like', '👍'));
+            dislikeBtn.addEventListener('click', () => handleReaction(dislikeBtn, post, 'dislike', '👎'));
 
-            likeBtn.addEventListener('click', () => {
-                if (currentReaction === 'like') {
-                    post.likes -= 1;
-                    likeBtn.innerHTML = `👍 Like (${post.likes})`;
-                    currentReaction = null;
-                    resetButtons(loveBtn, dislikeBtn);
-                } else {
-                    if (currentReaction) updateReactionCount(currentReaction, post, -1);
-                    post.likes += 1;
-                    likeBtn.innerHTML = `👍 Like (${post.likes})`;
-                    createParticles(likeBtn, '👍');  // Appel avec le bouton cliqué
-                    currentReaction = 'like';
-                    disableOtherReactions(loveBtn, dislikeBtn);
-                }
-            });
+            function handleReaction(button, post, reactionType, emoji) {
+                const isAlreadySelected = button.classList.contains('selected');
 
-            dislikeBtn.addEventListener('click', () => {
-                if (currentReaction === 'dislike') {
-                    post.dislikes -= 1;
-                    dislikeBtn.innerHTML = `👎 Dislike (${post.dislikes})`;
-                    currentReaction = null;
-                    resetButtons(loveBtn, likeBtn);
-                } else {
-                    if (currentReaction) updateReactionCount(currentReaction, post, -1);
-                    post.dislikes += 1;
-                    dislikeBtn.innerHTML = `👎 Dislike (${post.dislikes})`;
-                    createParticles(dislikeBtn, '👎');  // Appel avec le bouton cliqué
-                    currentReaction = 'dislike';
-                    disableOtherReactions(loveBtn, likeBtn);
-                }
-            });
+                // Réinitialiser les autres boutons de réaction
+                resetButtons(loveBtn, likeBtn, dislikeBtn);
 
+                if (isAlreadySelected) {
+                    // Si le bouton est déjà sélectionné, le désélectionner
+                    currentReaction = null;
+                    updateReactionCount(reactionType, post, -1);
+                    button.classList.remove('selected');
+                } else {
+                    // Si une autre réaction était sélectionnée, décrémente-la
+                    if (currentReaction) {
+                        updateReactionCount(currentReaction, post, -1);
+                        const previousButton = postElement.querySelector(`.${currentReaction}-btn`);
+                        previousButton.innerHTML = `${previousButton.textContent.split(" ")[0]} ${post[currentReaction + 's']}`;
+                    }
+
+                    // Appliquer la nouvelle réaction
+                    currentReaction = reactionType;
+                    updateReactionCount(reactionType, post, 1);
+                    button.classList.add('selected');
+                    createParticles(button, emoji);
+                }
+
+                // Mettre à jour le bouton avec le nouveau compteur
+                button.innerHTML = `${emoji} ${post[reactionType + 's']}`;
+            }
 
             // Gestion des commentaires
             const commentInput = postElement.querySelector('.comment-input');
@@ -135,8 +118,8 @@ fetch('data/posts.json')
                 if (commentText !== "") {
                     const newComment = document.createElement('li');
                     newComment.innerHTML = `
-            <img src="./images/profils/Vous.webp" alt="Profile Picture" class="profile-pic-comment">
-                    <strong>Vous:</strong> ${commentText}`;
+                      <img src="./images/profils/Vous.webp" alt="Profile Picture" class="profile-pic-comment">
+                      <strong>Vous:</strong> ${commentText}`;
                     commentList.appendChild(newComment);
                     commentInput.value = "";
                     post.comments.push({ author: "Vous", profilePicture: "Vous.webp", text: commentText });
@@ -146,19 +129,20 @@ fetch('data/posts.json')
     })
     .catch(error => console.error('Erreur lors du chargement des posts:', error));
 
-// Fonction pour désactiver les autres réactions
+// Fonction pour désactiver les autres boutons
 function disableOtherReactions(...buttons) {
     buttons.forEach(button => {
-        button.disabled = true; // Désactiver les autres boutons
-        button.style.opacity = 0.5; // Ajouter une indication visuelle
+        button.disabled = true;
+        button.style.opacity = 0.5;
     });
 }
 
 // Fonction pour réactiver les boutons si la réaction est annulée
 function resetButtons(...buttons) {
     buttons.forEach(button => {
-        button.disabled = false; // Réactiver les autres boutons
-        button.style.opacity = 1; // Remettre l'opacité à normale
+        button.classList.remove('selected'); // Retirer la classe "selected" des autres boutons
+        button.disabled = false;
+        button.style.opacity = 1;
     });
 }
 

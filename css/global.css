@@ -1,50 +1,60 @@
-/* Styles globaux (utilisés partout) */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd;
+    color: #333;
+}
+
 header {
-    background-color: #007bff;
-    padding: 1rem;
+    background-color: #bbdefb;
+    box-shadow: 5px 5px 10px #90a4ae, -5px -5px 10px #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1 {
     text-align: center;
 }
 
-h1 {
-    color: white;
+nav {
+    display: flex;
+    justify-content: flex-end;
 }
 
 nav a {
-    color: white;
-    margin: 0 15px;
+    margin: 0 10px;
     text-decoration: none;
-    font-size: 1.2rem;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 8px;
+
+
+    background-color: #bbdefb;
+    /* Bleu clair pour les liens */
+    box-shadow: 3px 3px 6px #90a4ae, -3px -3px 6px #ffffff;
+    transition: box-shadow 0.3s ease, transform 0.1s ease;
+    font-weight: bold;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    box-shadow: 4px 4px 8px #90a4ae, -4px -4px 8px #ffffff;
+}
+
+nav a:active {
+    box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
+    transform: scale(0.95);
 }
 
 main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #0056b3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
