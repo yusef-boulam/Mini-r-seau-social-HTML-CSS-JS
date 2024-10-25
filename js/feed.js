@@ -9,8 +9,8 @@ function createHeartBeat(button) {
 
     // Positionner le cœur pour qu'il se superpose exactement au bouton
     const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 12;
-    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 22;
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 20;
 
     heart.style.left = `${x}px`;
     heart.style.top = `${y}px`;
@@ -33,7 +33,7 @@ function createHeartBeat(button) {
     setTimeout(() => {
         heart.style.opacity = 0;
         heart.remove();
-    }, 600);
+    }, 1000);
 }
 
 // Fonction pour créer un effet de "pouce levé" avec animation
@@ -47,30 +47,29 @@ function createThumbsUp(button) {
 
     // Positionner le pouce pour qu'il se superpose exactement au bouton
     const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 20; // Décalage vers la gauche
-    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25; // Décalage vers la gauche
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 20;
 
     thumb.style.left = `${x}px`;
     thumb.style.top = `${y}px`;
 
     document.body.appendChild(thumb);
 
-    // Animation de montée, rotation, maintien et descente
-    thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Grossit et tourne
-    setTimeout(() => {
-        thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Maintient la taille agrandie
-    }, 300); // Maintenir pour un court instant
+    // Animation de rotation et disparition
+    thumb.style.transform = 'scale(1.5) rotate(360deg)';
 
-    // Retour à la taille d'origine
     setTimeout(() => {
-        thumb.style.transform = 'scale(1) rotate(0deg)'; // Reprend sa taille d'origine
-    }, 600); // Retour après un délai
+        thumb.style.transform = 'scale(1) rotate(0deg)';
+    }, 300);
 
-    // Disparition après l'animation
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1.5)';
+    }, 600);
+
     setTimeout(() => {
         thumb.style.opacity = 0;
         thumb.remove();
-    }, 900);
+    }, 2000);
 }
 
 // Fonction pour créer un effet de "pouce baissé" avec animation
@@ -84,30 +83,29 @@ function createThumbsDown(button) {
 
     // Positionner le pouce pour qu'il se superpose exactement au bouton
     const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 20; // Décalage vers la gauche
-    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25; // Décalage vers la gauche
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 15;
 
     thumb.style.left = `${x}px`;
     thumb.style.top = `${y}px`;
 
     document.body.appendChild(thumb);
 
-    // Animation de montée, rotation, maintien et descente
-    thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Grossit et tourne
-    setTimeout(() => {
-        thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Maintient la taille agrandie
-    }, 300); // Maintenir pour un court instant
+    // Animation de rotation et disparition
+    thumb.style.transform = 'scale(1.5) rotate(360deg)';
 
-    // Retour à la taille d'origine
     setTimeout(() => {
-        thumb.style.transform = 'scale(1) rotate(0deg)'; // Reprend sa taille d'origine
-    }, 600); // Retour après un délai
+        thumb.style.transform = 'scale(1) rotate(0deg)';
+    }, 300);
 
-    // Disparition après l'animation
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1.5)';
+    }, 600);
+
     setTimeout(() => {
         thumb.style.opacity = 0;
         thumb.remove();
-    }, 900);
+    }, 2000);
 }
 
 // Charger les posts à partir du JSON
