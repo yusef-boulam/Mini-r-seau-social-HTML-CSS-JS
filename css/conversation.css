@@ -1,126 +1,127 @@
-/* Styles pour la page Conversation */
+/* Conteneur des messages */
+h2 {
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
 .messages {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
-    background-color: #f9f9f9;
+    width: 100%;
+    max-width: 600px;
+    background-color: #c5e1f9;
+    /* Bleu clair pour correspondre au reste du site */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1), -3px -3px 8px rgba(255, 255, 255, 0.6);
+    margin-bottom: 15px;
+    overflow-y: auto;
+    max-height: 400px;
+    /* Limite de hauteur pour défiler */
 }
 
-.message {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-    position: relative;
-}
-
-/* Style pour l'image de profil de l'expéditeur */
-.message img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-/* Style pour le contenu du message */
-.message-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.message-content p {
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-.message-content small {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 5px;
-}
-
-/* Style spécifique pour les messages envoyés par l'utilisateur */
-.message.user-message {
-    background-color: #d1e7dd;
-    align-self: flex-end;
-}
-
-/* Style pour le champ de texte */
-#new-message {
-    width: calc(100% - 80px);
-    /* Taille réduite pour laisser de l'espace au bouton */
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#send-message {
-    width: 60px;
-    height: 40px;
-    margin-left: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px;
-}
-
-#send-message:hover {
-    background-color: #0056b3;
-}
-
-/* Style pour la boîte d'envoi de message */
-.message-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-
-/* style pour la photo de profil */
-
-.profile-pic {
-    width: 50px;
-    /* Taille suffisante pour être visible */
-    height: 50px;
-    border-radius: 50%;
-    /* Arrondi pour un effet de profil */
-    display: block;
-    /* S'assurer que l'image n'est pas cachée */
-    visibility: visible;
-    /* S'assurer qu'elle est visible */
-    object-fit: cover;
-    /* Ajuster l'image si nécessaire */
-    background-color: transparent;
-    /* Pas d'arrière-plan bloquant */
-}
-
-
-
+/* Style des messages */
 .message {
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
 }
 
-.user-message {
-    justify-content: flex-end;
+/* Profil et contenu du message */
+.message img.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px -1px 3px rgba(255, 255, 255, 0.5);
+    object-fit: cover;
 }
 
+/* Contenu des messages */
 .message-content {
-    background-color: #f1f1f1;
-    padding: 10px;
+    background-color: #ffffff;
+    padding: 10px 15px;
     border-radius: 10px;
-    max-width: 60%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+    max-width: 70%;
+}
+
+.message-content p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.message-content small {
+    font-size: 0.75em;
+    color: #999;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Messages de l'utilisateur alignés à droite */
+.user-message {
+    flex-direction: row-reverse;
+    /* Inverser l'ordre pour aligner à droite */
+}
+
+.user-message .profile-pic {
+    margin-left: 10px;
+    /* Ajuste l'espace à gauche pour le profil */
+    margin-right: 0;
+}
+
+.user-message .message-content {
+    background-color: #b3d9ff;
+    /* Bleu plus prononcé pour messages de "Vous" */
+    text-align: right;
+}
+
+/* Champ d'envoi de message */
+.message-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    background-color: #c5e1f9;
+    /* Bleu clair pour correspondre au reste du site */
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1), -3px -3px 8px rgba(255, 255, 255, 0.6);
+}
+
+.message-box input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.1), inset -1px -1px 4px rgba(255, 255, 255, 0.5);
+    font-size: 1em;
+    margin-right: 10px;
+    outline: none;
+}
+
+/* Style du bouton Envoyer, aligné avec les autres boutons */
+.message-box button {
+    background-color: #1976d2;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.2s ease, transform 0.05s ease;
+}
+
+.message-box button:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3), -3px -3px 8px rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.message-box button:active {
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+    transform: scale(0.98);
 }
