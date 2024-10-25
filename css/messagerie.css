@@ -1,85 +1,72 @@
-/* Styles pour la page Messagerie */
+/* Styles spécifiques aux conversations dans la messagerie */
 .conversations {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Conteneur principal pour les conversations */
-.conversations {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Centrer les éléments horizontalement */
-    padding: 20px;
-}
-
-/* Style pour chaque conversation */
-.conversation {
-    width: 80%;
-    /* Limiter la largeur des conversations */
+    width: 100%;
     max-width: 600px;
-    /* Largeur maximale des discussions */
-    margin-bottom: 20px;
+}
+
+.conversation {
+    background-color: #c5e1f9;
+    /* Couleur bleu clair plus prononcée */
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    margin-bottom: 15px;
     padding: 15px;
-    background-color: #f0f0f3;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    border: 1px solid #90a4ae;
+    /* Bordure pour mieux délimiter */
 }
 
-.conversation h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.conversation p {
-    font-size: 1rem;
-    color: #666;
-}
-
-.conversation a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-.conversation a:hover {
-    text-decoration: underline;
-}
-
-/* Effet au survol */
 .conversation:hover {
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-
-/* Styles pour la photo de profil */
-
-
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    /* Pour arrondir l'image */
-    object-fit: cover;
-    /* Pour que l'image soit bien ajustée */
-    margin-right: 10px;
+    transform: translateY(-3px);
+    /* Légère élévation au survol */
+    box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.2), -8px -8px 18px rgba(255, 255, 255, 0.7);
 }
 
 .conversation-header {
     display: flex;
     align-items: center;
+    width: 100%;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+    object-fit: cover;
 }
 
 .conversation-header h2 {
-    margin: 0;
     font-size: 1.2em;
+    font-weight: bold;
+    color: #1976d2;
+    margin: 0;
 }
 
 .conversation-header p {
-    margin: 0;
     font-size: 0.9em;
     color: #555;
+    margin-top: 5px;
+}
+
+/* Style pour le lien vers la conversation complète */
+.conversation a {
+    font-size: 0.9em;
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #e3f2fd;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.conversation a:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15), -3px -3px 8px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
 }
