@@ -59,6 +59,31 @@ main {
     padding: 20px;
 }
 
+/* GESTION DES BOUTONS */
+
+.comment-btn {
+    background-color: #bbdefb;
+    /* Bleu clair */
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    box-shadow: 3px 3px 6px #90a4ae, -3px -3px 6px #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.comment-btn:hover {
+    box-shadow: 4px 4px 8px #90a4ae, -4px -4px 8px #ffffff;
+}
+
+.comment-btn:active {
+    box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
+    transform: scale(0.95);
+}
+
+
 
 /* RESPONSIVE */
 

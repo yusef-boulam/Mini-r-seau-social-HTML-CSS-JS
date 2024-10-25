@@ -70,3 +70,36 @@
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15), -3px -3px 8px rgba(255, 255, 255, 0.6);
     transform: scale(1.05);
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 644px) {
+    .conversations {
+
+        padding: 0 10px;
+    }
+
+    .conversation {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+
+    .conversation-header h2 {
+        font-size: 1em;
+    }
+
+    .conversation-header p {
+        font-size: 0.8em;
+    }
+
+    .conversation a {
+        margin-top: 10px;
+        font-size: 0.8em;
+    }
+}
