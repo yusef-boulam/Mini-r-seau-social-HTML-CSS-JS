@@ -1,31 +1,113 @@
-// Fonction pour créer des particules autour du bouton cliqué
-function createParticles(button, emoji) {
-    for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('span');
-        particle.textContent = emoji;
-        particle.style.position = 'absolute';
+// Fonction pour créer un effet de "battement de cœur" superposé au bouton cliqué
+function createHeartBeat(button) {
+    const heart = document.createElement('span');
+    heart.textContent = '❤️';
+    heart.style.position = 'absolute';
+    heart.style.fontSize = '24px'; // Taille initiale du cœur
+    heart.style.opacity = 1;
+    heart.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
-        const buttonRect = button.getBoundingClientRect();
-        const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 10;
-        const y = buttonRect.top + window.scrollY;
+    // Positionner le cœur pour qu'il se superpose exactement au bouton
+    const buttonRect = button.getBoundingClientRect();
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 12;
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
 
-        particle.style.left = `${x}px`;
-        particle.style.top = `${y}px`;
-        particle.style.opacity = 1;
-        particle.style.transition = `transform 1s ease-out, opacity 1s ease-out`;
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
 
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 50 + Math.random() * 50;
+    document.body.appendChild(heart);
 
-        particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * -distance}px)`;
-
-        document.body.appendChild(particle);
-
+    // Ajouter l'animation de battement de cœur
+    function beat() {
+        heart.style.transform = 'scale(1.5)'; // Grossit
         setTimeout(() => {
-            particle.style.opacity = 0;
-            particle.remove();
-        }, 1000);
+            heart.style.transform = 'scale(1)'; // Reprend sa taille d'origine
+        }, 150);
     }
+
+    // Effectuer le battement deux fois avant de disparaître
+    beat();
+    setTimeout(beat, 300);
+
+    // Disparition après les battements
+    setTimeout(() => {
+        heart.style.opacity = 0;
+        heart.remove();
+    }, 600);
+}
+
+// Fonction pour créer un effet de "pouce levé" avec animation
+function createThumbsUp(button) {
+    const thumb = document.createElement('span');
+    thumb.textContent = '👍';
+    thumb.style.position = 'absolute';
+    thumb.style.fontSize = '24px';
+    thumb.style.opacity = 1;
+    thumb.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+    // Positionner le pouce pour qu'il se superpose exactement au bouton
+    const buttonRect = button.getBoundingClientRect();
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 20; // Décalage vers la gauche
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
+
+    thumb.style.left = `${x}px`;
+    thumb.style.top = `${y}px`;
+
+    document.body.appendChild(thumb);
+
+    // Animation de montée, rotation, maintien et descente
+    thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Grossit et tourne
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Maintient la taille agrandie
+    }, 300); // Maintenir pour un court instant
+
+    // Retour à la taille d'origine
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1) rotate(0deg)'; // Reprend sa taille d'origine
+    }, 600); // Retour après un délai
+
+    // Disparition après l'animation
+    setTimeout(() => {
+        thumb.style.opacity = 0;
+        thumb.remove();
+    }, 900);
+}
+
+// Fonction pour créer un effet de "pouce baissé" avec animation
+function createThumbsDown(button) {
+    const thumb = document.createElement('span');
+    thumb.textContent = '👎';
+    thumb.style.position = 'absolute';
+    thumb.style.fontSize = '24px';
+    thumb.style.opacity = 1;
+    thumb.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+    // Positionner le pouce pour qu'il se superpose exactement au bouton
+    const buttonRect = button.getBoundingClientRect();
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 20; // Décalage vers la gauche
+    const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 12;
+
+    thumb.style.left = `${x}px`;
+    thumb.style.top = `${y}px`;
+
+    document.body.appendChild(thumb);
+
+    // Animation de montée, rotation, maintien et descente
+    thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Grossit et tourne
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1.5) rotate(360deg)'; // Maintient la taille agrandie
+    }, 300); // Maintenir pour un court instant
+
+    // Retour à la taille d'origine
+    setTimeout(() => {
+        thumb.style.transform = 'scale(1) rotate(0deg)'; // Reprend sa taille d'origine
+    }, 600); // Retour après un délai
+
+    // Disparition après l'animation
+    setTimeout(() => {
+        thumb.style.opacity = 0;
+        thumb.remove();
+    }, 900);
 }
 
 // Charger les posts à partir du JSON
@@ -85,26 +167,28 @@ fetch('data/posts.json')
                 resetButtons(loveBtn, likeBtn, dislikeBtn);
 
                 if (isAlreadySelected) {
-                    // Si le bouton est déjà sélectionné, le désélectionner
                     currentReaction = null;
                     updateReactionCount(reactionType, post, -1);
                     button.classList.remove('selected');
                 } else {
-                    // Si une autre réaction était sélectionnée, décrémente-la
                     if (currentReaction) {
                         updateReactionCount(currentReaction, post, -1);
                         const previousButton = postElement.querySelector(`.${currentReaction}-btn`);
                         previousButton.innerHTML = `${previousButton.textContent.split(" ")[0]} ${post[currentReaction + 's']}`;
                     }
-
-                    // Appliquer la nouvelle réaction
                     currentReaction = reactionType;
                     updateReactionCount(reactionType, post, 1);
                     button.classList.add('selected');
-                    createParticles(button, emoji);
+                    if (reactionType === 'love') {
+                        createHeartBeat(button); // Animation spéciale pour le bouton "Love"
+                    } else if (reactionType === 'like') {
+                        createThumbsUp(button); // Animation spéciale pour le bouton "Like"
+                    } else if (reactionType === 'dislike') {
+                        createThumbsDown(button); // Animation spéciale pour le bouton "Dislike"
+                    } else {
+                        createParticles(button, emoji); // Animation standard pour autres réactions
+                    }
                 }
-
-                // Mettre à jour le bouton avec le nouveau compteur
                 button.innerHTML = `${emoji} ${post[reactionType + 's']}`;
             }
 
