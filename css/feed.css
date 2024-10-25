@@ -17,6 +17,10 @@
     margin-bottom: 10px;
 }
 
+.post-image {
+    width: 100%;
+}
+
 /* Texte du post */
 .post p {
     font-size: 1em;
