@@ -18,6 +18,16 @@
     /* Bordure pour mieux délimiter */
 }
 
+
+.last-message {
+    display: flex;
+    flex-direction: row;
+}
+
+.last-message p {
+    margin-left: 10px;
+}
+
 .conversation:hover {
     transform: translateY(-3px);
     /* Légère élévation au survol */
@@ -52,6 +62,7 @@
     margin-top: 5px;
 }
 
+
 /* Style pour le lien vers la conversation complète */
 .conversation a {
     font-size: 0.9em;
@@ -85,21 +96,12 @@
         padding: 10px;
     }
 
-    .profile-pic {
-        width: 40px;
-        height: 40px;
-    }
-
-    .conversation-header h2 {
-        font-size: 1em;
-    }
-
-    .conversation-header p {
-        font-size: 0.8em;
+    .last-message {
+        flex-direction: column;
+        margin-top: 15px;
     }
 
     .conversation a {
-        margin-top: 10px;
-        font-size: 0.8em;
+        margin-top: 20px;
     }
 }

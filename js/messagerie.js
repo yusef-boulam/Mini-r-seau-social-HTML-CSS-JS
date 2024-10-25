@@ -25,7 +25,10 @@ fetch('data/messages.json')
                     <img src="./images/profils/${friendProfilePic}" alt="${friendName} Profile Picture" class="profile-pic">
                     <div>
                         <h2>${friendName}</h2>
-                        <p>Dernier message : <strong>${lastMessage.sender}:</strong> ${lastMessage.content}</p>
+                        <div class="last-message">
+                        <p>Dernier message :</p> 
+                        <p> <strong>${lastMessage.sender}: </strong> ${lastMessage.content}</p>
+                         </div>
                     </div>
                 </div>
                 <a href="conversation.html?friend=${encodeURIComponent(friendName)}">Voir la conversation</a>
