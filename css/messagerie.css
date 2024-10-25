@@ -6,16 +6,13 @@
 
 .conversation {
     background-color: #c5e1f9;
-    /* Couleur bleu clair plus prononcée */
     border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
     margin-bottom: 15px;
     padding: 15px;
     display: flex;
     align-items: center;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
-    border: 1px solid #90a4ae;
-    /* Bordure pour mieux délimiter */
 }
 
 
