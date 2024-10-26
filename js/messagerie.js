@@ -27,11 +27,11 @@ fetch('data/messages.json')
                         <h2>${friendName}</h2>
                         <div class="last-message">
                         <p>Dernier message :</p> 
-                        <p> <strong>${lastMessage.sender}: </strong> ${lastMessage.content}</p>
+                        <p><strong>${lastMessage.sender}:</strong> ${lastMessage.content}</p>
                          </div>
                     </div>
                 </div>
-                <a href="conversation.html?friend=${encodeURIComponent(friendName)}">Voir la conversation</a>
+                <a href="conversation.html?friend=${encodeURIComponent(friendName)}" class="btn">Voir la conversation</a>
             `;
 
             conversationsContainer.appendChild(conversationElement);

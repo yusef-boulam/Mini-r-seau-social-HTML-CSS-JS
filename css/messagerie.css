@@ -60,25 +60,6 @@
 }
 
 
-/* Style pour le lien vers la conversation complète */
-.conversation a {
-    font-size: 0.9em;
-    color: #1976d2;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: auto;
-    padding: 8px;
-    border-radius: 8px;
-    background-color: #e3f2fd;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-    transition: box-shadow 0.3s ease, transform 0.1s ease;
-}
-
-.conversation a:hover {
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15), -3px -3px 8px rgba(255, 255, 255, 0.6);
-    transform: scale(1.05);
-}
-
 /* RESPONSIVE */
 
 @media (max-width: 644px) {

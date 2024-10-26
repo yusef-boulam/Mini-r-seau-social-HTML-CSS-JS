@@ -61,9 +61,11 @@ main {
 
 /* GESTION DES BOUTONS */
 
-.comment-btn {
+.btn {
     background-color: #bbdefb;
-    /* Bleu clair */
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
     border: none;
     border-radius: 10px;
     padding: 10px 15px;
@@ -74,16 +76,14 @@ main {
     transition: box-shadow 0.3s ease, transform 0.1s ease;
 }
 
-.comment-btn:hover {
+.btn:hover {
     box-shadow: 4px 4px 8px #90a4ae, -4px -4px 8px #ffffff;
 }
 
-.comment-btn:active {
+.btn:active {
     box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
     transform: scale(0.95);
 }
-
-
 
 /* RESPONSIVE */
 

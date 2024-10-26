@@ -29,7 +29,7 @@ function displayFriends(filter = '') {
                     <img src="${friend.profilePicture}" alt="Photo de ${friend.name}" class="friend-profile-pic">
                     <p>${friend.name}</p>
                 </div>
-                <a href="${friend.messageLink}">Envoyer un message</a>
+                <a href="${friend.messageLink}" class="btn">Envoyer un message</a>
             `;
 
             // Ajouter l'élément à la liste

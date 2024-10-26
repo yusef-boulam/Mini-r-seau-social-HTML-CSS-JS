@@ -140,7 +140,7 @@ fetch('data/posts.json')
                   </li>`).join('')}
               </ul>
               <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
-              <button class="comment-btn">Commenter</button>
+              <button id="comment-btn" class="btn">Commenter</button>
             </div>
           `;
 
@@ -184,7 +184,7 @@ fetch('data/posts.json')
                     } else if (reactionType === 'dislike') {
                         createThumbsDown(button); // Animation spéciale pour le bouton "Dislike"
                     } else {
-                        createParticles(button, emoji); // Animation standard pour autres réactions
+                        return;
                     }
                 }
                 button.innerHTML = `${emoji} ${post[reactionType + 's']}`;
@@ -192,7 +192,7 @@ fetch('data/posts.json')
 
             // Gestion des commentaires
             const commentInput = postElement.querySelector('.comment-input');
-            const commentBtn = postElement.querySelector('.comment-btn');
+            const commentBtn = postElement.querySelector('#comment-btn');
             const commentList = postElement.querySelector('.comment-list');
 
             commentBtn.addEventListener('click', () => {
