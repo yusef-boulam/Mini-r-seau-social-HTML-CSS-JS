@@ -139,7 +139,7 @@ fetch('data/posts.json')
                     <strong>${comment.author}:</strong> ${comment.text}
                   </li>`).join('')}
               </ul>
-              <input type="text" class="comment-input" placeholder="Ajouter un commentaire">
+              <textarea class="comment-input" placeholder="Ajouter un commentaire"></textarea>
               <button id="comment-btn" class="btn">Commenter</button>
             </div>
           `;
@@ -201,12 +201,13 @@ fetch('data/posts.json')
                     const newComment = document.createElement('li');
                     newComment.innerHTML = `
                       <img src="./images/profils/Vous.webp" alt="Profile Picture" class="profile-pic-comment">
-                      <strong>Vous:</strong> ${commentText}`;
+                      <strong>Vous:</strong> ${commentText.replace(/\n/g, "<br>")}`;
                     commentList.appendChild(newComment);
                     commentInput.value = "";
                     post.comments.push({ author: "Vous", profilePicture: "Vous.webp", text: commentText });
                 }
             });
+
         });
     })
     .catch(error => console.error('Erreur lors du chargement des posts:', error));

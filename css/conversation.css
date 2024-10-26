@@ -90,38 +90,3 @@ h2 {
     padding: 10px;
     box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
 }
-
-.message-box input[type="text"] {
-    flex-grow: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.1), inset -1px -1px 4px rgba(255, 255, 255, 0.5);
-    font-size: 1em;
-    margin-right: 10px;
-    outline: none;
-}
-
-/* Style du bouton Envoyer, aligné avec les autres boutons */
-.message-box button {
-    background-color: #1976d2;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.5);
-    transition: box-shadow 0.2s ease, transform 0.05s ease;
-}
-
-.message-box button:hover {
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3), -3px -3px 8px rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
-}
-
-.message-box button:active {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.5);
-    transform: scale(0.98);
-}
