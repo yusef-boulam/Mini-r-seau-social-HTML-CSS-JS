@@ -71,8 +71,40 @@ main {
     color: #1976d2;
 }
 
+
 /* Effet visuel lors du drag and drop */
 .friend.drag-over {
     border: 2px dashed #1976d2;
     background-color: #d1e6ff;
+    opacity: 0.8;
+    /* Légère transparence pour signaler l'élément en cours de déplacement */
+    transition: transform 0.2s ease-in-out;
+    z-index: 10;
+}
+
+/* Création d'un espace visuel pour insérer l'élément */
+.friend-insert-marker {
+    height: 10px;
+    margin: 5px 0;
+    border-top: 2px dashed #1976d2;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Affiche le marqueur d'insertion lorsque l'élément est en drag au-dessus */
+.friend.drag-over+.friend-insert-marker,
+.friend-insert-marker+.friend.drag-over {
+    opacity: 1;
+}
+
+/* Effet de déplacement pour les éléments situés sous le drag */
+.friend.drag-over~.friend {
+    transform: translateY(20px);
+    /* Décalage vers le bas pour les éléments en dessous */
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Rétablissement de la position pour tous les contacts */
+.friend {
+    transition: transform 0.2s ease-in-out;
 }
