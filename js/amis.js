@@ -6,24 +6,30 @@ const friends = [
     { id: 4, name: "Bob", profilePicture: "./images/profils/bob.webp", messageLink: "conversation.html?friend=Bob" }
 ];
 
-// Afficher la liste d'amis
 const friendListContainer = document.querySelector('.friend-list');
 const friendSearchInput = document.getElementById('friend-search');
 
-// Fonction pour afficher les amis (avec un filtre optionnel)
+let draggedFriend = null; // Garde la référence de l'ami en train d'être déplacé
+
+// Fonction pour afficher les amis et ajouter des espaces de drop entre eux
 function displayFriends(filter = '') {
     friendListContainer.innerHTML = ''; // Réinitialiser la liste des amis
 
-    // Parcourir les amis et les ajouter à la page
     friends
-        .filter(friend => friend.name.toLowerCase().includes(filter.toLowerCase())) // Filtrer les amis
+        .filter(friend => friend.name.toLowerCase().includes(filter.toLowerCase()))
         .forEach(friend => {
+            // Créer un espace de drop avant chaque contact
+            const dropZone = document.createElement('div');
+            dropZone.classList.add('drop-zone');
+            friendListContainer.appendChild(dropZone);
+            addDropZoneEvents(dropZone);
+
+            // Créer et ajouter le contact
             const friendElement = document.createElement('div');
             friendElement.classList.add('friend');
             friendElement.setAttribute('draggable', 'true'); // Rendre chaque ami "draggable"
             friendElement.dataset.id = friend.id; // Ajouter un identifiant pour chaque ami
 
-            // HTML de l'ami avec la photo de profil à côté du nom et le lien vers la messagerie
             friendElement.innerHTML = `
                 <div class="friend-info">
                     <img src="${friend.profilePicture}" alt="Photo de ${friend.name}" class="friend-profile-pic">
@@ -32,12 +38,95 @@ function displayFriends(filter = '') {
                 <a href="${friend.messageLink}" class="btn">Envoyer un message</a>
             `;
 
-            // Ajouter l'élément à la liste
             friendListContainer.appendChild(friendElement);
-
-            // Ajouter les événements de drag and drop
             addDragAndDropEvents(friendElement);
         });
+
+    // Ajouter un dernier espace de drop à la fin
+    const dropZone = document.createElement('div');
+    dropZone.classList.add('drop-zone');
+    friendListContainer.appendChild(dropZone);
+    addDropZoneEvents(dropZone);
+}
+
+// Fonction pour ajouter des événements de drag and drop aux amis
+function addDragAndDropEvents(friendElement) {
+    friendElement.addEventListener('dragstart', (event) => {
+        draggedFriend = event.target; // Sauvegarder l'élément en cours de drag
+    });
+
+    friendElement.addEventListener('dragend', () => {
+        draggedFriend = null; // Réinitialiser l'élément en cours de drag
+        resetDropZones(); // Réinitialiser les zones de dépôt après le drag
+    });
+
+    friendElement.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        const bounding = event.target.getBoundingClientRect();
+        const offset = event.clientY - bounding.top;
+
+        resetDropZones(); // Réinitialiser les zones de dépôt avant d'ajuster
+
+        // Vérifier si c'est le premier contact
+        if (event.target === friendListContainer.firstChild.nextSibling) {
+            // Si c'est le premier contact, on permet le drop uniquement en dessous
+            event.target.nextSibling?.classList.add('drag-over');
+        } else {
+            // Sinon, on détermine la moitié supérieure ou inférieure pour ajuster la zone de dépôt
+            if (offset < bounding.height / 2) {
+                event.target.previousSibling?.classList.add('drag-over'); // Agrandit la zone de dépôt au-dessus
+            } else {
+                event.target.nextSibling?.classList.add('drag-over'); // Agrandit la zone de dépôt en dessous
+            }
+        }
+    });
+}
+
+// Fonction pour ajouter les événements de drop aux zones de drop
+function addDropZoneEvents(dropZone) {
+    dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault(); // Permettre le drop
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        if (draggedFriend) {
+            friendListContainer.insertBefore(draggedFriend, dropZone.nextSibling);
+            reorganizeDropZones(); // Réorganiser les zones de drop après chaque déplacement
+        }
+    });
+}
+
+// Fonction pour réinitialiser les zones de drop
+function resetDropZones() {
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.classList.remove('drag-over');
+    });
+}
+
+// Fonction pour réorganiser les zones de drop de manière uniforme
+function reorganizeDropZones() {
+    // Récupère tous les éléments amis dans friendListContainer
+    const friends = Array.from(friendListContainer.querySelectorAll('.friend'));
+
+    // Réinitialise friendListContainer
+    friendListContainer.innerHTML = '';
+
+    // Ajoute un espace de drop et un contact de manière alternée pour tout uniformiser
+    friends.forEach(friend => {
+        const dropZone = document.createElement('div');
+        dropZone.classList.add('drop-zone');
+        friendListContainer.appendChild(dropZone);
+        addDropZoneEvents(dropZone);
+
+        friendListContainer.appendChild(friend);
+    });
+
+    // Ajoute un dernier espace de drop à la fin
+    const finalDropZone = document.createElement('div');
+    finalDropZone.classList.add('drop-zone');
+    friendListContainer.appendChild(finalDropZone);
+    addDropZoneEvents(finalDropZone);
 }
 
 // Fonction de filtrage
@@ -45,54 +134,6 @@ friendSearchInput.addEventListener('input', (event) => {
     const searchValue = event.target.value;
     displayFriends(searchValue); // Filtrer les amis en fonction du texte saisi
 });
-
-let draggedFriend = null; // Garde la référence de l'ami en train d'être déplacé
-
-// Fonction pour ajouter les événements de drag and drop à chaque ami
-function addDragAndDropEvents(friendElement) {
-
-    // Début du drag
-    friendElement.addEventListener('dragstart', (event) => {
-        draggedFriend = event.target; // Sauvegarder l'élément en cours de drag
-        event.target.style.opacity = 0.5; // Appliquer un effet visuel au démarrage du drag
-    });
-
-    // Fin du drag
-    friendElement.addEventListener('dragend', (event) => {
-        event.target.style.opacity = ''; // Réinitialiser l'opacité
-        draggedFriend = null; // Réinitialiser l'ami déplacé
-    });
-
-    // Permettre le drop sur d'autres éléments
-    friendElement.addEventListener('dragover', (event) => {
-        event.preventDefault(); // Permettre le drop
-        event.target.classList.add('drag-over'); // Style visuel pour montrer la cible du drop
-    });
-
-    // Quand l'utilisateur quitte l'élément sans déposer
-    friendElement.addEventListener('dragleave', (event) => {
-        event.target.classList.remove('drag-over'); // Retirer le style quand le drag quitte l'élément
-    });
-
-    // Gestion du drop
-    friendElement.addEventListener('drop', (event) => {
-        event.preventDefault();
-        event.target.classList.remove('drag-over'); // Retirer le style de drag-over
-        if (draggedFriend !== friendElement) {
-            // Réorganiser les amis
-            const allFriends = Array.from(friendListContainer.querySelectorAll('.friend'));
-            const draggedIndex = allFriends.indexOf(draggedFriend);
-            const targetIndex = allFriends.indexOf(friendElement);
-
-            // Insertion logique du drag par rapport à l'ami ciblé
-            if (targetIndex > draggedIndex) {
-                friendListContainer.insertBefore(draggedFriend, friendElement.nextSibling);
-            } else {
-                friendListContainer.insertBefore(draggedFriend, friendElement);
-            }
-        }
-    });
-}
 
 // Afficher la liste des amis au chargement de la page
 displayFriends();
