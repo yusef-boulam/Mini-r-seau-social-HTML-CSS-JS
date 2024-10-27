@@ -14,12 +14,12 @@ main {
     border-radius: 12px;
     border: none;
     background-color: #ffffff;
-    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff; /* Effet de relief */
+    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
     font-size: 1em;
     color: #333;
     margin-bottom: 25px;
     outline: none;
-    transition: box-shadow 0.3s ease; /* Animation sur le focus */
+    transition: box-shadow 0.3s ease;
 }
 
 /* Effet au focus pour la barre de recherche */
@@ -43,14 +43,14 @@ main {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
-    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff; /* Effet de relief */
+    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
     cursor: pointer;
-    transition: transform 0.3s ease, top 0.3s ease; /* Animation au survol */
+    transition: transform 0.3s ease, top 0.3s ease;
 }
 
 /* Effet de survol pour les cartes d'amis */
 .friend:hover {
-    transform: translateY(-3px); /* Légère élévation au survol */
+    transform: translateY(-3px);
     box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.2), -6px -6px 18px rgba(255, 255, 255, 0.7);
 }
 
@@ -66,35 +66,12 @@ main {
     height: 50px;
     border-radius: 50%; 
     margin-right: 15px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5); /* Ombre douce */
-    object-fit: cover; /* Recadre l'image uniformément */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+    object-fit: cover;
 }
 
 /* Style du nom d’ami */
 .friend-info p {
     margin: 0;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #1976d2;
-}
-
-/* Style par défaut des zones de dépôt (invisibles) */
-.drop-zone {
-    height: 5px; /* Hauteur minimale pour un léger espace */
-    background-color: transparent;
-    opacity: 0;
-    transition: height 0.3s ease, opacity 0.3s ease; /* Animation au survol */
-}
-
-/* Apparence de la zone de dépôt lorsque le survol est actif */
-.drop-zone.drag-over {
-    opacity: 1; /* Zone de dépôt visible au survol */
-    height: 40px; /* La zone de dépôt s'agrandit pour indiquer l’espace de drop */
-    background-color: rgba(0, 150, 255, 0.2); /* Couleur légère pour visualiser la zone */
-    border-radius: 5px;
-}
-
-/* Masque temporairement un élément lors du drag pour éviter les duplications visuelles */
-.invisible {
-    display: none;
+    font-size: 1.1
 }
