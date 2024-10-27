@@ -14,12 +14,20 @@ body {
 
 /* En-tête de page */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Hauteur du header */
+    background-color: #fff;
+    z-index: 1000;
     background-color: #bbdefb;
     box-shadow: 5px 5px 10px #90a4ae, -5px -5px 10px #ffffff; /* Ombres pour effet 3D */
     padding: 20px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between; /* Aligne le titre et la navigation */
+    width: 100%;
 }
 
 /* Style du titre de l'en-tête */
@@ -63,7 +71,9 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    padding-top: 120px; /* Même valeur que la hauteur du header */
 }
+
 
 /* Style pour la zone de saisie des commentaires */
 .comment-input {
@@ -104,12 +114,20 @@ main {
     transform: scale(0.95);
 }
 
+
+
 /* Responsive : ajustements pour petits écrans */
 @media (max-width: 644px) {
     header {
         flex-direction: column;
         align-items: center;
+        height: 130px; /* Hauteur plus grande pour le titre centré */
     }
+
+    main{
+        padding-top: 160px; /* Ajustement pour le header plus grand */
+    }
+    
 
     nav {
         margin-top: 10px;

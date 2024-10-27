@@ -33,7 +33,7 @@ const friends = [
 // Sélection du conteneur où la liste d'amis sera affichée
 const sortableList = document.querySelector(".sortable-list");
 
-// Vérification que sortableList existe
+// Vérification que le conteneur existe
 if (!sortableList) {
     console.error("Le conteneur .sortable-list n'existe pas.");
 }
@@ -41,8 +41,9 @@ if (!sortableList) {
 // Sélection du champ de recherche
 const friendSearchInput = document.getElementById('friend-search');
 
-let draggedElement = null;
-let offsetY = 0; // Décalage Y pour alignement au point de contact
+// Variables pour le glisser-déposer
+let draggedElement = null; // Élément actuellement glissé
+let offsetY = 0; // Décalage Y pour aligner l'élément au point de contact
 
 // Fonction pour extraire les initiales du prénom et du nom
 function getInitials(firstName, lastName) {
@@ -51,25 +52,27 @@ function getInitials(firstName, lastName) {
     return { firstNameInitial, lastNameInitial };
 }
 
-// Fonction pour afficher la liste des amis avec filtrage
+// Fonction pour afficher la liste des amis avec possibilité de filtrage
 function displayFriends(filter = '') {
-    if (!sortableList) return; // Si sortableList n'existe pas, on arrête la fonction
+    if (!sortableList) return; // Si le conteneur n'existe pas, on arrête la fonction
 
-    sortableList.innerHTML = ''; // Vide la liste avant de l'afficher
+    sortableList.innerHTML = ''; // Vide le contenu actuel du conteneur
+
     friends.forEach(friend => {
         const { firstNameInitial, lastNameInitial } = getInitials(friend.firstName, friend.lastName);
         const filterLower = filter.toLowerCase();
 
         // Vérifie si le filtre correspond à la première lettre du prénom ou du nom
         if (filter === '' || firstNameInitial === filterLower || lastNameInitial === filterLower) {
-            // Crée un élément pour chaque ami
+            // Crée un élément de liste pour chaque ami
             const friendElement = document.createElement('div');
-            friendElement.classList.add('friend', 'item'); // Ajoute la classe 'item' pour le tri
-            friendElement.dataset.id = friend.id; // Stocke l'ID de l'ami
+            friendElement.classList.add('friend', 'item'); // Ajoute des classes pour le style et le tri
+            friendElement.dataset.id = friend.id; // Stocke l'ID de l'ami pour référence
 
-            // Construire le nom complet
+            // Construit le nom complet
             const fullName = friend.firstName + (friend.lastName ? ' ' + friend.lastName : '');
 
+            // Définit le contenu HTML de l'élément ami
             friendElement.innerHTML = `
                 <div class="friend-info details">
                     <img src="${friend.profilePicture}" alt="Photo de ${fullName}" class="friend-profile-pic">
@@ -78,20 +81,21 @@ function displayFriends(filter = '') {
                 <a href="${friend.messageLink}" class="btn">Envoyer un message</a>
             `;
 
+            // Ajoute l'élément ami au conteneur principal
             sortableList.appendChild(friendElement);
 
-            // Ajoute les événements de glisser-déposer unifiés pour PC et mobile
+            // Ajoute les événements de glisser-déposer pour l'élément ami
             addUnifiedDragEvents(friendElement);
         }
     });
 }
 
-// Fonction pour ajouter les événements de glisser-déposer unifiés
+// Fonction pour ajouter les événements de glisser-déposer unifiés (souris et tactile)
 function addUnifiedDragEvents(friendElement) {
-    // Vérification que friendElement existe avant d'ajouter les événements
+    // Vérifie que l'élément existe avant d'ajouter les événements
     if (!friendElement) return;
 
-    // Gestion du début du glissement (souris)
+    // Gestion du début du glissement avec la souris
     friendElement.addEventListener("mousedown", (e) => {
         // Si le clic est sur le bouton, ne pas initier le glissement
         if (e.target.closest('.btn')) {
@@ -103,7 +107,7 @@ function addUnifiedDragEvents(friendElement) {
         document.addEventListener("mouseup", onMouseUp);
     });
 
-    // Gestion du début du toucher (mobile)
+    // Gestion du début du glissement tactile (mobile)
     friendElement.addEventListener("touchstart", (e) => {
         // Si le toucher est sur le bouton, ne pas initier le glissement
         if (e.target.closest('.btn')) {
@@ -116,31 +120,31 @@ function addUnifiedDragEvents(friendElement) {
         document.addEventListener("touchend", onTouchEnd);
     });
 
-    // Fonction pour initialiser le glissement et maintenir la taille
+    // Fonction pour initialiser le glissement et conserver la taille de l'élément
     function startDrag(clientY, element) {
         draggedElement = element;
-        draggedElement.classList.add("dragging");
+        draggedElement.classList.add("dragging"); // Ajoute une classe pour le style pendant le glissement
 
-        // Capture l'offset pour aligner au toucher et maintenir la taille
+        // Calcule le décalage Y pour aligner l'élément avec le point de contact
         offsetY = clientY - element.getBoundingClientRect().top;
         draggedElement.style.width = `${element.offsetWidth}px`; // Conserve la largeur
         draggedElement.style.height = `${element.offsetHeight}px`; // Conserve la hauteur
     }
 
-    // Gestion du mouvement de la souris
+    // Gestion du mouvement de la souris pendant le glissement
     function onMouseMove(e) {
         e.preventDefault();
         onDrag(e.clientY);
     }
 
-    // Gestion du mouvement tactile
+    // Gestion du mouvement tactile pendant le glissement
     function onTouchMove(e) {
         e.preventDefault();
         const touch = e.touches[0];
         onDrag(touch.clientY);
     }
 
-    // Fonction pour gérer le déplacement de l'élément
+    // Fonction pour gérer le déplacement de l'élément glissé
     function onDrag(clientY) {
         if (!draggedElement) return;
 
@@ -149,6 +153,7 @@ function addUnifiedDragEvents(friendElement) {
         draggedElement.style.zIndex = "1000";
         draggedElement.style.top = `${yPosition}px`;
 
+        // Trouve l'élément après lequel insérer l'élément glissé
         const afterElement = getDragAfterElement(sortableList, clientY);
         if (afterElement) {
             sortableList.insertBefore(draggedElement, afterElement);
@@ -157,21 +162,21 @@ function addUnifiedDragEvents(friendElement) {
         }
     }
 
-    // Gestion de la fin du glissement (souris)
+    // Gestion de la fin du glissement avec la souris
     function onMouseUp() {
         endDrag();
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
     }
 
-    // Gestion de la fin du toucher (mobile)
+    // Gestion de la fin du glissement tactile
     function onTouchEnd() {
         endDrag();
         document.removeEventListener("touchmove", onTouchMove);
         document.removeEventListener("touchend", onTouchEnd);
     }
 
-    // Fonction pour terminer le glissement et réinitialiser la taille
+    // Fonction pour terminer le glissement et réinitialiser les styles
     function endDrag() {
         if (draggedElement) {
             draggedElement.style.position = "static";
@@ -185,20 +190,22 @@ function addUnifiedDragEvents(friendElement) {
     }
 }
 
-// Fonction pour trouver la position d'insertion de l'élément en déplacement
+// Fonction pour déterminer l'emplacement d'insertion pendant le glissement
 function getDragAfterElement(container, clientY) {
+    // Sélectionne tous les éléments qui ne sont pas en cours de glissement
     const elements = [...container.querySelectorAll(".item:not(.dragging)")];
     return elements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
         const offset = clientY - box.top - box.height / 2;
+        // Trouve l'élément le plus proche au point de contact
         return (offset < 0 && offset > closest.offset) ? { offset: offset, element: child } : closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-// Écouteur d'événement pour le champ de recherche
+// Écouteur d'événement pour le champ de recherche des amis
 friendSearchInput.addEventListener('input', (event) => {
     const searchValue = event.target.value.trim().toLowerCase();
-    displayFriends(searchValue);
+    displayFriends(searchValue); // Met à jour l'affichage en fonction du filtre
 });
 
 // Affichage initial de la liste d'amis
