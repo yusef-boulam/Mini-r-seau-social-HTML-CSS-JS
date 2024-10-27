@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversation</title>
+    <!-- Chargement des styles globaux et spécifiques à la page de conversation -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/conversation.css">
 </head>
@@ -12,6 +13,7 @@
 <body>
     <header>
         <h1>Conversation</h1>
+        <!-- Navigation entre les différentes sections du mini réseau social -->
         <nav>
             <a href="index.html">Actualité</a>
             <a href="messagerie.html">Messagerie</a>
@@ -20,16 +22,19 @@
     </header>
 
     <main id="conversation">
+        <!-- Conteneur pour afficher les messages de la conversation, qui seront ajoutés dynamiquement via JavaScript -->
         <section class="messages">
             <!-- Les messages dynamiques apparaîtront ici -->
         </section>
 
+        <!-- Zone de saisie de texte et bouton pour envoyer un nouveau message dans la conversation -->
         <div class="message-box">
             <textarea id="new-message" class="comment-input" placeholder="Écrire un message..."></textarea>
             <button id="send-message" class="btn">Envoyer</button>
         </div>
     </main>
 
+    <!-- Chargement du script pour gérer les messages et l'interaction de l'utilisateur dans la conversation -->
     <script src="js/conversation.js"></script>
 </body>
 

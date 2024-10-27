@@ -1,8 +1,8 @@
 // Liste d'amis codée en dur avec photos de profil chargées localement et liens vers la messagerie
 const friends = [
-    { id: 1, name: "John", profilePicture: "./images/profils/john.webp", messageLink: "conversation.html?friend=John" },
+    { id: 1, name: "John Smith", profilePicture: "./images/profils/john.webp", messageLink: "conversation.html?friend=John" },
     { id: 2, name: "Jane", profilePicture: "./images/profils/jane.webp", messageLink: "conversation.html?friend=Jane" },
-    { id: 3, name: "Alice", profilePicture: "./images/profils/alice.webp", messageLink: "conversation.html?friend=Alice" },
+    { id: 3, name: "Alice Dubois", profilePicture: "./images/profils/alice.webp", messageLink: "conversation.html?friend=Alice" },
     { id: 4, name: "Bob", profilePicture: "./images/profils/bob.webp", messageLink: "conversation.html?friend=Bob" }
 ];
 
