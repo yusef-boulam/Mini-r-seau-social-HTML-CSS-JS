@@ -6,7 +6,7 @@ main {
     padding: 20px;
 }
 
-/* Barre de filtrage avec un style et un relief */
+/* Style pour la barre de recherche des amis avec un effet de relief */
 #friend-search {
     width: 100%;
     max-width: 600px;
@@ -19,22 +19,22 @@ main {
     color: #333;
     margin-bottom: 25px;
     outline: none;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease; /* Transition pour l'effet de focus */
 }
 
-/* Effet au focus pour la barre de recherche */
+/* Effet au focus pour la barre de recherche, ajoutant un relief inversé */
 #friend-search:focus {
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7), 
                 5px 5px 15px rgba(0, 0, 0, 0.15), -5px -5px 15px rgba(255, 255, 255, 0.7);
 }
 
-/* Conteneur pour la liste des amis */
+/* Conteneur pour afficher la liste des amis */
 .friend-list {
     width: 100%;
     max-width: 600px;
 }
 
-/* Style des cartes pour chaque ami avec relief */
+/* Style de chaque carte d'ami, avec un effet de relief et un fond coloré */
 .friend {
     background-color: #c5e1f9;
     border-radius: 15px;
@@ -45,41 +45,53 @@ main {
     margin-bottom: 15px;
     box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
     cursor: pointer;
-    transition: transform 0.3s ease, top 0.3s ease;
+    transition: transform 0.3s ease, top 0.3s ease; /* Transition pour l'effet de survol */
 }
 
 /* Effet de survol pour les cartes d'amis */
 .friend:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Soulève légèrement la carte */
     box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.2), -6px -6px 18px rgba(255, 255, 255, 0.7);
 }
 
-/* Informations de chaque ami (nom et photo) */
+/* Informations de chaque ami, contenant le nom et la photo de profil */
 .friend-info {
     display: flex;
     align-items: center;
 }
 
-/* Photo de profil des amis */
+/* Style de la photo de profil pour chaque ami */
 .friend-profile-pic {
     width: 50px;
     height: 50px;
-    border-radius: 50%; 
+    border-radius: 50%; /* Forme ronde pour les photos de profil */
     margin-right: 15px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
     object-fit: cover;
 }
 
-/* Style du nom d’ami */
+/* Style du nom d’ami, avec taille et couleur */
 .friend-info p {
+    font-size:  1.2em;
+    font-weight: bold;
+    color: #1976d2;
     margin: 0;
-    font-size: 1.1
 }
 
+/* Effet d'opacité lors du déplacement d'un élément dans le drag-and-drop */
 .dragging {
     opacity: 0.5;
 }
 
+/* Style de la zone de dépôt lors du survol avec un élément à glisser */
 .drop-zone.drag-over {
     background-color: #f0f0f0;
+}
+
+/* RESPONSIVE */
+/* Ajustement de la taille de la police pour le nom des amis sur petits écrans */
+@media (max-width: 644px) {
+    .friend-info p {
+        font-size: 15px;
+    }
 }

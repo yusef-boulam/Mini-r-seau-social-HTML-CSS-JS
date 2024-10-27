@@ -74,8 +74,12 @@ h2 {
 
 /* Style spécifique au contenu des messages de l'utilisateur */
 .user-message .message-content {
-    background-color: #b3d9ff; /* Couleur distincte pour messages de "Vous" */
+    background-color: #333; /* Couleur distincte pour messages de "Vous" */
     text-align: right;
+}
+
+.user-message .message-content p{
+    color: white;
 }
 
 /* Conteneur pour la zone de saisie de message */

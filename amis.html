@@ -2,30 +2,42 @@
 <html lang="fr">
 
 <head>
+    <!-- Définition de l'encodage des caractères et des paramètres d'affichage pour mobile -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Titre de la page -->
     <title>Liste d'amis</title>
+    
+    <!-- Inclusion des fichiers CSS globaux et spécifiques à la page -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/amis.css">
 </head>
 
 <body>
+    <!-- En-tête de la page contenant le titre et le menu de navigation -->
     <header>
         <h1>Liste d'amis</h1>
         <nav>
+            <!-- Liens de navigation vers les autres pages du site -->
             <a href="index.html">Actualité</a>
             <a href="messagerie.html">Messagerie</a>
             <a href="amis.html">Amis</a>
         </nav>
     </header>
 
+    <!-- Contenu principal de la page -->
     <main id="friends">
+        <!-- Champ de recherche pour filtrer la liste d'amis -->
         <input type="text" id="friend-search" placeholder="Rechercher un ami">
+        
+        <!-- Conteneur de la liste des amis, dynamique et interactif -->
         <div class="friend-list sortable-list">
-            <!-- Les amis seront générés dynamiquement ici -->
+            <!-- Les amis seront générés dynamiquement ici via JavaScript -->
         </div>
     </main>
 
+    <!-- Inclusion du fichier JavaScript pour la gestion des interactions avec la liste d'amis -->
     <script src="js/amis.js"></script>
 </body>
 
