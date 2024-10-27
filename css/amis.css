@@ -24,7 +24,8 @@ main {
 
 /* Effet au focus pour la barre de recherche */
 #friend-search:focus {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7), 5px 5px 15px rgba(0, 0, 0, 0.15), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7), 
+                5px 5px 15px rgba(0, 0, 0, 0.15), -5px -5px 15px rgba(255, 255, 255, 0.7);
 }
 
 /* Conteneur pour la liste des amis */
@@ -89,5 +90,11 @@ main {
 .drop-zone.drag-over {
     opacity: 1; /* Zone de dépôt visible au survol */
     height: 40px; /* La zone de dépôt s'agrandit pour indiquer l’espace de drop */
-    background-color: transparent; /* Incolore */
+    background-color: rgba(0, 150, 255, 0.2); /* Couleur légère pour visualiser la zone */
+    border-radius: 5px;
+}
+
+/* Masque temporairement un élément lors du drag pour éviter les duplications visuelles */
+.invisible {
+    display: none;
 }

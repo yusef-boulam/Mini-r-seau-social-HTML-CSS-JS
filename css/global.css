@@ -1,32 +1,37 @@
+/* Réinitialisation générale pour les marges et le box-sizing */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Style de base pour le corps */
 body {
     font-family: Arial, sans-serif;
-    background-color: #e3f2fd;
+    background-color: #e3f2fd; /* Couleur de fond douce */
     color: #333;
 }
 
+/* En-tête de page */
 header {
     background-color: #bbdefb;
-    box-shadow: 5px 5px 10px #90a4ae, -5px -5px 10px #ffffff;
+    box-shadow: 5px 5px 10px #90a4ae, -5px -5px 10px #ffffff; /* Ombres pour effet 3D */
     padding: 20px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Aligne le titre et la navigation */
 }
 
+/* Style du titre de l'en-tête */
 header h1 {
     text-align: center;
     font-size: 25px;
 }
 
+/* Style de la navigation dans l'en-tête */
 nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Aligne les liens de navigation à droite */
 }
 
 nav a {
@@ -41,15 +46,18 @@ nav a {
     font-weight: bold;
 }
 
+/* Effet au survol des liens de navigation */
 nav a:hover {
     box-shadow: 6px 6px 12px #90a4ae, -6px -6px 12px #ffffff;
 }
 
+/* Effet de clic sur les liens de navigation */
 nav a:active {
     box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
-    transform: scale(0.95);
+    transform: scale(0.95); /* Légère réduction sur clic */
 }
 
+/* Conteneur principal */
 main {
     display: flex;
     flex-direction: column;
@@ -57,20 +65,18 @@ main {
     padding: 20px;
 }
 
-
+/* Style pour la zone de saisie des commentaires */
 .comment-input {
     width: 100%;
     padding: 8px;
     border-radius: 10px;
     background-color: #e3f2fd;
-    box-shadow: inset 2px 2px 5px #90a4ae, inset -2px -2px 5px #ffffff;
+    box-shadow: inset 2px 2px 5px #90a4ae, inset -2px -2px 5px #ffffff; /* Ombre interne */
     border: none;
     margin-top: 10px;
 }
 
-
-/* GESTION DES BOUTONS */
-
+/* Styles de base pour les boutons */
 .btn {
     background-color: #bbdefb;
     color: #333;
@@ -84,20 +90,21 @@ main {
     cursor: pointer;
     font-weight: bold;
     transition: box-shadow 0.3s ease, transform 0.1s ease;
-    margin-left: 10px;
+    margin-left: 10px; /* Espacement entre les boutons */
 }
 
+/* Effet au survol des boutons */
 .btn:hover {
     box-shadow: 6px 6px 12px #90a4ae, -6px -6px 12px #ffffff;
 }
 
+/* Effet de clic sur les boutons */
 .btn:active {
     box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
     transform: scale(0.95);
 }
 
-/* RESPONSIVE */
-
+/* Responsive : ajustements pour petits écrans */
 @media (max-width: 644px) {
     header {
         flex-direction: column;
@@ -110,6 +117,6 @@ main {
 
     nav a {
         display: block;
-        margin: 10px;
+        margin: 10px; /* Alignement vertical des liens de navigation */
     }
 }
