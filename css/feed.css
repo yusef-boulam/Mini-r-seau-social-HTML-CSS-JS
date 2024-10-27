@@ -1,113 +1,118 @@
+/* Conteneur principal des posts */
 .posts {
-    width: 100%;
-    max-width: 600px;
+  width: 100%;
+  max-width: 600px; /* Limite la largeur pour une meilleure lisibilité */
 }
 
+/* Style de chaque post */
 .post {
-    background-color: #bbdefb;
-    border-radius: 15px;
-    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
-    margin-bottom: 20px;
-    padding: 20px;
+  background-color: #bbdefb; /* Couleur de fond douce */
+  border-radius: 15px; 
+  box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff; /* Effet de relief */
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
+/* En-tête du post avec profil de l'auteur */
 .post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
+/* Image associée au post */
 .post-image {
-    width: 100%;
+  width: 100%; /* Image prend toute la largeur */
 }
 
 /* Texte du post */
 .post p {
-    font-size: 1em;
-    color: #333;
-    line-height: 1.6;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: justify;
-    font-weight: 400;
+  font-size: 1em;
+  color: #333;
+  line-height: 1.6; /* Hauteur de ligne pour lisibilité */
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: justify;
+  font-weight: 400;
 }
 
+/* Photo de profil dans l'en-tête */
 .profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  margin-right: 10px;
 }
 
+/* Conteneur des boutons de réaction */
 .reactions {
-    display: flex;
-    margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
 }
 
+/* Boutons de réaction (like, dislike, love) */
 .reaction-btn {
-    background-color: #bbdefb;
-    border: none;
-    border-radius: 10px;
-    padding: 8px;
-    margin-right: 5px;
-    box-shadow: 3px 3px 6px #90a4ae, -3px -3px 6px #ffffff;
-    transition: box-shadow 0.3s ease, transform 0.1s ease;
-    cursor: pointer;
+  background-color: #bbdefb;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  margin-right: 5px;
+  box-shadow: 3px 3px 6px #90a4ae, -3px -3px 6px #ffffff;
+  transition: box-shadow 0.3s ease, transform 0.1s ease; /* Animation douce */
+  cursor: pointer;
 }
 
+/* Effet au survol des boutons de réaction */
 .reaction-btn:hover {
-    box-shadow: 6px 6px 12px #90a4ae, -6px -6px 12px #ffffff;
+  box-shadow: 6px 6px 12px #90a4ae, -6px -6px 12px #ffffff;
 }
 
 /* Style enfoncé pour le bouton sélectionné */
 .reaction-btn.selected {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.5);
-    transform: scale(0.98);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+  transform: scale(0.98); /* Légère réduction pour effet de sélection */
 }
 
+/* Effet de clic sur les boutons de réaction */
 .reaction-btn:active {
-    box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
-    transform: scale(0.95);
+  box-shadow: inset 3px 3px 6px #90a4ae, inset -3px -3px 6px #ffffff;
+  transform: scale(0.95);
 }
 
+/* Conteneur pour les commentaires */
 .comments {
-    margin-top: 15px;
+  margin-top: 15px;
 }
-
-
-
 
 /* Photo de profil dans les commentaires */
 .profile-pic-comment {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    /* Forme ronde */
-    margin-right: 8px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px -1px 3px rgba(255, 255, 255, 0.5);
-    object-fit: cover;
-    /* Pour bien ajuster l'image */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1),
+    -1px -1px 3px rgba(255, 255, 255, 0.5); /* Ombre douce */
+  object-fit: cover; /* Recadre l'image uniformément */
 }
 
 /* Style pour chaque commentaire */
 .comment-list li {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #e0e5ec;
-    /* Légère séparation entre les commentaires */
-    color: #333;
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e5ec; /* Séparation entre les commentaires */
+  color: #333;
 }
 
-/* Texte de l'auteur dans les commentaires */
+/* Nom de l'auteur du commentaire */
 .comment-list li strong {
-    color: #1976d2;
-    /* Bleu foncé pour l'auteur */
-    margin-right: 5px;
+  color: #1976d2; /* Couleur distinctive pour l'auteur */
+  margin-right: 5px;
 }
 
 /* Texte du commentaire */
 .comment-list li span {
-    font-size: 0.9em;
-    line-height: 1.4;
+  font-size: 0.9em;
+  line-height: 1.4;
 }

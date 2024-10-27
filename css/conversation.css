@@ -1,4 +1,4 @@
-/* Conteneur des messages */
+/* Titre de la conversation */
 h2 {
     margin-bottom: 20px;
     text-align: left;
@@ -6,52 +6,53 @@ h2 {
     max-width: 600px;
 }
 
+/* Conteneur principal des messages */
 .messages {
     width: 100%;
     max-width: 600px;
-    background-color: #c5e1f9;
-    /* Bleu clair pour correspondre au reste du site */
+    background-color: #c5e1f9; /* Bleu clair pour correspondre au reste du site */
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff; /* Effet de relief */
     margin-bottom: 15px;
     overflow-y: auto;
-    max-height: 400px;
-    /* Limite de hauteur pour défiler */
+    max-height: 400px; /* Limite de hauteur pour permettre le défilement */
 }
 
-/* Style des messages */
+/* Style de chaque message */
 .message {
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
 }
 
-/* Profil et contenu du message */
+/* Photo de profil dans les messages */
 .message img.profile-pic {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 50%; 
     margin-right: 10px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px -1px 3px rgba(255, 255, 255, 0.5);
-    object-fit: cover;
+    object-fit: cover; /* Recadre l'image uniformément */
 }
 
-/* Contenu des messages */
+/* Conteneur du contenu des messages */
 .message-content {
     background-color: #ffffff;
     padding: 10px 15px;
     border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-    max-width: 70%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5); /* Légère ombre pour relief */
+    max-width: 70%; /* Limite la largeur du message */
 }
 
+/* Texte du message */
 .message-content p {
     margin: 0;
     font-size: 0.9em;
     color: #333;
 }
 
+/* Timestamp des messages */
 .message-content small {
     font-size: 0.75em;
     color: #999;
@@ -62,31 +63,29 @@ h2 {
 
 /* Messages de l'utilisateur alignés à droite */
 .user-message {
-    flex-direction: row-reverse;
-    /* Inverser l'ordre pour aligner à droite */
+    flex-direction: row-reverse; /* Inverse l'ordre pour aligner le message à droite */
 }
 
+/* Ajuste les marges de la photo de profil pour les messages de l'utilisateur */
 .user-message .profile-pic {
-    margin-left: 10px;
-    /* Ajuste l'espace à gauche pour le profil */
+    margin-left: 10px; /* Espace à gauche pour les messages alignés à droite */
     margin-right: 0;
 }
 
+/* Style spécifique au contenu des messages de l'utilisateur */
 .user-message .message-content {
-    background-color: #b3d9ff;
-    /* Bleu plus prononcé pour messages de "Vous" */
+    background-color: #b3d9ff; /* Couleur distincte pour messages de "Vous" */
     text-align: right;
 }
 
-/* Champ d'envoi de message */
+/* Conteneur pour la zone de saisie de message */
 .message-box {
     display: flex;
     align-items: center;
     width: 100%;
     max-width: 600px;
-    background-color: #c5e1f9;
-    /* Bleu clair pour correspondre au reste du site */
+    background-color: #c5e1f9; /* Bleu clair pour correspondre au reste du site */
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px #90a4ae, -8px -8px 16px #ffffff; /* Effet de relief */
 }
