@@ -1,13 +1,14 @@
 // Fonction pour créer un effet de "battement de cœur" superposé au bouton cliqué
 function createHeartBeat(button) {
+    // Crée un élément "cœur" avec l'emoji ❤️
     const heart = document.createElement('span');
     heart.textContent = '❤️';
-    heart.style.position = 'absolute';
+    heart.style.position = 'absolute'; // Positionne le cœur en absolu
     heart.style.fontSize = '24px'; // Taille initiale du cœur
-    heart.style.opacity = 1;
-    heart.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    heart.style.opacity = 1; // Opacité initiale
+    heart.style.transition = 'transform 0.3s ease, opacity 0.3s ease'; // Transition pour animation
 
-    // Positionner le cœur pour qu'il se superpose exactement au bouton
+    // Calculer la position pour centrer le cœur sur le bouton cliqué
     const buttonRect = button.getBoundingClientRect();
     const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 22;
     const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 20;
@@ -17,19 +18,19 @@ function createHeartBeat(button) {
 
     document.body.appendChild(heart);
 
-    // Ajouter l'animation de battement de cœur
+    // Fonction pour animer le battement du cœur
     function beat() {
-        heart.style.transform = 'scale(1.5)'; // Grossit
+        heart.style.transform = 'scale(1.5)'; // Grossir l'élément
         setTimeout(() => {
-            heart.style.transform = 'scale(1)'; // Reprend sa taille d'origine
-        }, 150);
+            heart.style.transform = 'scale(1)'; // Retour à la taille initiale
+        }, 150); // Durée du battement
     }
 
-    // Effectuer le battement deux fois avant de disparaître
+    // Exécute le battement deux fois
     beat();
     setTimeout(beat, 300);
 
-    // Disparition après les battements
+    // Effet de disparition après les battements
     setTimeout(() => {
         heart.style.opacity = 0;
         heart.remove();
@@ -38,6 +39,7 @@ function createHeartBeat(button) {
 
 // Fonction pour créer un effet de "pouce levé" avec animation
 function createThumbsUp(button) {
+    // Crée un élément "pouce levé" avec l'emoji 👍
     const thumb = document.createElement('span');
     thumb.textContent = '👍';
     thumb.style.position = 'absolute';
@@ -45,9 +47,9 @@ function createThumbsUp(button) {
     thumb.style.opacity = 1;
     thumb.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
-    // Positionner le pouce pour qu'il se superpose exactement au bouton
+    // Calculer la position pour centrer le pouce sur le bouton
     const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25; // Décalage vers la gauche
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25;
     const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 20;
 
     thumb.style.left = `${x}px`;
@@ -55,17 +57,20 @@ function createThumbsUp(button) {
 
     document.body.appendChild(thumb);
 
-    // Animation de rotation et disparition
+    // Début de l'animation de rotation et de grossissement
     thumb.style.transform = 'scale(1.5) rotate(360deg)';
 
+    // Revenir à la taille normale après rotation
     setTimeout(() => {
         thumb.style.transform = 'scale(1) rotate(0deg)';
     }, 300);
 
+    // Re-grossir pour donner un effet de pulsation
     setTimeout(() => {
         thumb.style.transform = 'scale(1.5)';
     }, 600);
 
+    // Effet de disparition
     setTimeout(() => {
         thumb.style.opacity = 0;
         thumb.remove();
@@ -74,6 +79,7 @@ function createThumbsUp(button) {
 
 // Fonction pour créer un effet de "pouce baissé" avec animation
 function createThumbsDown(button) {
+    // Crée un élément "pouce baissé" avec l'emoji 👎
     const thumb = document.createElement('span');
     thumb.textContent = '👎';
     thumb.style.position = 'absolute';
@@ -81,9 +87,9 @@ function createThumbsDown(button) {
     thumb.style.opacity = 1;
     thumb.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
-    // Positionner le pouce pour qu'il se superpose exactement au bouton
+    // Calculer la position pour centrer le pouce sur le bouton
     const buttonRect = button.getBoundingClientRect();
-    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25; // Décalage vers la gauche
+    const x = buttonRect.left + window.scrollX + (buttonRect.width / 2) - 25;
     const y = buttonRect.top + window.scrollY + (buttonRect.height / 2) - 15;
 
     thumb.style.left = `${x}px`;
@@ -91,17 +97,20 @@ function createThumbsDown(button) {
 
     document.body.appendChild(thumb);
 
-    // Animation de rotation et disparition
+    // Début de l'animation de rotation et de grossissement
     thumb.style.transform = 'scale(1.5) rotate(360deg)';
 
+    // Revenir à la taille normale après rotation
     setTimeout(() => {
         thumb.style.transform = 'scale(1) rotate(0deg)';
     }, 300);
 
+    // Re-grossir pour donner un effet de pulsation
     setTimeout(() => {
         thumb.style.transform = 'scale(1.5)';
     }, 600);
 
+    // Effet de disparition
     setTimeout(() => {
         thumb.style.opacity = 0;
         thumb.remove();
@@ -114,10 +123,12 @@ fetch('data/posts.json')
     .then(posts => {
         const postsContainer = document.querySelector('.posts');
 
+        // Parcourt chaque post pour les afficher
         posts.forEach(post => {
             const postElement = document.createElement('div');
             postElement.classList.add('post');
 
+            // Crée la structure HTML pour le post (photo de profil, texte, image et réactions)
             postElement.innerHTML = `
             <div class="post-header">
               <img src="./images/profils/${post.profilePicture}" alt="Profile Picture" class="profile-pic">
@@ -148,27 +159,30 @@ fetch('data/posts.json')
 
             let currentReaction = null;
 
-            // Sélectionner les boutons de réaction
+            // Sélectionne les boutons de réaction dans le post
             const loveBtn = postElement.querySelector('.love-btn');
             const likeBtn = postElement.querySelector('.like-btn');
             const dislikeBtn = postElement.querySelector('.dislike-btn');
 
-            // Ajouter les événements de clics pour gérer la sélection et désélection
+            // Ajoute des événements de clics pour chaque bouton de réaction
             loveBtn.addEventListener('click', () => handleReaction(loveBtn, post, 'love', '❤️'));
             likeBtn.addEventListener('click', () => handleReaction(likeBtn, post, 'like', '👍'));
             dislikeBtn.addEventListener('click', () => handleReaction(dislikeBtn, post, 'dislike', '👎'));
 
+            // Fonction pour gérer les réactions aux posts
             function handleReaction(button, post, reactionType, emoji) {
                 const isAlreadySelected = button.classList.contains('selected');
 
-                // Réinitialiser les autres boutons de réaction
+                // Réinitialise les autres boutons de réaction
                 resetButtons(loveBtn, likeBtn, dislikeBtn);
 
                 if (isAlreadySelected) {
+                    // Annule la réaction si elle est déjà sélectionnée
                     currentReaction = null;
                     updateReactionCount(reactionType, post, -1);
                     button.classList.remove('selected');
                 } else {
+                    // Ajoute une nouvelle réaction et met à jour le compteur
                     if (currentReaction) {
                         updateReactionCount(currentReaction, post, -1);
                         const previousButton = postElement.querySelector(`.${currentReaction}-btn`);
@@ -177,16 +191,17 @@ fetch('data/posts.json')
                     currentReaction = reactionType;
                     updateReactionCount(reactionType, post, 1);
                     button.classList.add('selected');
+
+                    // Lance l'animation correspondante selon la réaction
                     if (reactionType === 'love') {
-                        createHeartBeat(button); // Animation spéciale pour le bouton "Love"
+                        createHeartBeat(button);
                     } else if (reactionType === 'like') {
-                        createThumbsUp(button); // Animation spéciale pour le bouton "Like"
+                        createThumbsUp(button);
                     } else if (reactionType === 'dislike') {
-                        createThumbsDown(button); // Animation spéciale pour le bouton "Dislike"
-                    } else {
-                        return;
+                        createThumbsDown(button);
                     }
                 }
+                // Met à jour le bouton avec le compteur mis à jour
                 button.innerHTML = `${emoji} ${post[reactionType + 's']}`;
             }
 
@@ -195,9 +210,11 @@ fetch('data/posts.json')
             const commentBtn = postElement.querySelector('#comment-btn');
             const commentList = postElement.querySelector('.comment-list');
 
+            // Ajoute un nouveau commentaire lorsque le bouton est cliqué
             commentBtn.addEventListener('click', () => {
                 const commentText = commentInput.value.trim();
                 if (commentText !== "") {
+                    // Crée un nouvel élément de commentaire
                     const newComment = document.createElement('li');
                     newComment.innerHTML = `
                       <img src="./images/profils/Vous.webp" alt="Profile Picture" class="profile-pic-comment">
@@ -223,7 +240,7 @@ function disableOtherReactions(...buttons) {
 // Fonction pour réactiver les boutons si la réaction est annulée
 function resetButtons(...buttons) {
     buttons.forEach(button => {
-        button.classList.remove('selected'); // Retirer la classe "selected" des autres boutons
+        button.classList.remove('selected'); // Retire la classe "selected" des autres boutons
         button.disabled = false;
         button.style.opacity = 1;
     });

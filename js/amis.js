@@ -6,6 +6,7 @@ const friends = [
     { id: 4, name: "Bob", profilePicture: "./images/profils/bob.webp", messageLink: "conversation.html?friend=Bob" }
 ];
 
+// Sélection des éléments HTML pour afficher la liste d'amis et pour la recherche d'amis
 const friendListContainer = document.querySelector('.friend-list');
 const friendSearchInput = document.getElementById('friend-search');
 
@@ -13,22 +14,23 @@ let draggedFriend = null; // Garde la référence de l'ami en train d'être dép
 
 // Fonction pour afficher les amis et ajouter des espaces de drop entre eux
 function displayFriends(filter = '') {
-    friendListContainer.innerHTML = ''; // Réinitialiser la liste des amis
+    friendListContainer.innerHTML = ''; // Réinitialise la liste des amis
 
     friends
+        // Filtre les amis selon le texte de recherche
         .filter(friend => friend.name.toLowerCase().includes(filter.toLowerCase()))
         .forEach(friend => {
-            // Créer un espace de drop avant chaque contact
+            // Créer un espace de drop avant chaque contact pour drag and drop
             const dropZone = document.createElement('div');
             dropZone.classList.add('drop-zone');
             friendListContainer.appendChild(dropZone);
-            addDropZoneEvents(dropZone);
+            addDropZoneEvents(dropZone); // Ajoute les événements de drag and drop à chaque zone
 
-            // Créer et ajouter le contact
+            // Crée un élément pour chaque ami avec son image et un lien vers la messagerie
             const friendElement = document.createElement('div');
             friendElement.classList.add('friend');
             friendElement.setAttribute('draggable', 'true'); // Rendre chaque ami "draggable"
-            friendElement.dataset.id = friend.id; // Ajouter un identifiant pour chaque ami
+            friendElement.dataset.id = friend.id; // Ajoute un identifiant pour chaque ami
 
             friendElement.innerHTML = `
                 <div class="friend-info">
@@ -39,10 +41,10 @@ function displayFriends(filter = '') {
             `;
 
             friendListContainer.appendChild(friendElement);
-            addDragAndDropEvents(friendElement);
+            addDragAndDropEvents(friendElement); // Ajoute les événements de drag and drop aux amis
         });
 
-    // Ajouter un dernier espace de drop à la fin
+    // Ajouter un dernier espace de drop à la fin pour permettre le déplacement d'un ami à la fin de la liste
     const dropZone = document.createElement('div');
     dropZone.classList.add('drop-zone');
     friendListContainer.appendChild(dropZone);
@@ -52,27 +54,27 @@ function displayFriends(filter = '') {
 // Fonction pour ajouter des événements de drag and drop aux amis
 function addDragAndDropEvents(friendElement) {
     friendElement.addEventListener('dragstart', (event) => {
-        draggedFriend = event.target; // Sauvegarder l'élément en cours de drag
+        draggedFriend = event.target; // Sauvegarde l'élément en cours de drag
     });
 
     friendElement.addEventListener('dragend', () => {
-        draggedFriend = null; // Réinitialiser l'élément en cours de drag
-        resetDropZones(); // Réinitialiser les zones de dépôt après le drag
+        draggedFriend = null; // Réinitialise l'élément en cours de drag
+        resetDropZones(); // Réinitialise les zones de dépôt après le drag
     });
 
     friendElement.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        const bounding = event.target.getBoundingClientRect();
+        event.preventDefault(); // Permet le drop
+        const bounding = event.target.getBoundingClientRect(); // Récupère les dimensions de l'élément
         const offset = event.clientY - bounding.top;
 
-        resetDropZones(); // Réinitialiser les zones de dépôt avant d'ajuster
+        resetDropZones(); // Réinitialise les zones de dépôt avant d'ajuster
 
-        // Vérifier si c'est le premier contact
+        // Vérifie si c'est le premier ami dans la liste
         if (event.target === friendListContainer.firstChild.nextSibling) {
-            // Si c'est le premier contact, on permet le drop uniquement en dessous
+            // Si c'est le premier ami, autorise le drop uniquement en dessous
             event.target.nextSibling?.classList.add('drag-over');
         } else {
-            // Sinon, on détermine la moitié supérieure ou inférieure pour ajuster la zone de dépôt
+            // Sinon, détermine la moitié supérieure ou inférieure pour ajuster la zone de dépôt
             if (offset < bounding.height / 2) {
                 event.target.previousSibling?.classList.add('drag-over'); // Agrandit la zone de dépôt au-dessus
             } else {
@@ -91,20 +93,22 @@ function addDropZoneEvents(dropZone) {
     dropZone.addEventListener('drop', (event) => {
         event.preventDefault();
         if (draggedFriend) {
+            // Insère l'ami déplacé avant la zone de dépôt
             friendListContainer.insertBefore(draggedFriend, dropZone.nextSibling);
-            reorganizeDropZones(); // Réorganiser les zones de drop après chaque déplacement
+            reorganizeDropZones(); // Réorganise les zones de drop après chaque déplacement
         }
     });
 }
 
 // Fonction pour réinitialiser les zones de drop
 function resetDropZones() {
+    // Retire la classe 'drag-over' de toutes les zones de dépôt pour un état propre
     document.querySelectorAll('.drop-zone').forEach(zone => {
         zone.classList.remove('drag-over');
     });
 }
 
-// Fonction pour réorganiser les zones de drop de manière uniforme
+// Fonction pour réorganiser les zones de drop de manière uniforme après un déplacement
 function reorganizeDropZones() {
     // Récupère tous les éléments amis dans friendListContainer
     const friends = Array.from(friendListContainer.querySelectorAll('.friend'));
@@ -112,7 +116,7 @@ function reorganizeDropZones() {
     // Réinitialise friendListContainer
     friendListContainer.innerHTML = '';
 
-    // Ajoute un espace de drop et un contact de manière alternée pour tout uniformiser
+    // Ajoute un espace de drop et un ami de manière alternée pour uniformiser la liste
     friends.forEach(friend => {
         const dropZone = document.createElement('div');
         dropZone.classList.add('drop-zone');
@@ -129,10 +133,10 @@ function reorganizeDropZones() {
     addDropZoneEvents(finalDropZone);
 }
 
-// Fonction de filtrage
+// Fonction de filtrage pour rechercher des amis dans la liste
 friendSearchInput.addEventListener('input', (event) => {
     const searchValue = event.target.value;
-    displayFriends(searchValue); // Filtrer les amis en fonction du texte saisi
+    displayFriends(searchValue); // Filtrer les amis en fonction du texte saisi dans le champ de recherche
 });
 
 // Afficher la liste des amis au chargement de la page
