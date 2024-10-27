@@ -1,42 +1,102 @@
-// Liste des amis avec leurs noms et photos de profil
+// Liste des amis avec leurs prénoms, noms de famille, photos de profil et liens de message
 const friends = [
-    { id: 1, name: "John Smith", profilePicture: "./images/profils/john.webp" },
-    { id: 2, name: "Jane Doe", profilePicture: "./images/profils/jane.webp" },
-    { id: 3, name: "Alice Dubois", profilePicture: "./images/profils/alice.webp" },
-    { id: 4, name: "Bob Johnson", profilePicture: "./images/profils/bob.webp" }
+    {
+        id: 1,
+        firstName: "John",
+        lastName: "Smith",
+        profilePicture: "./images/profils/john.webp",
+        messageLink: "#"
+    },
+    {
+        id: 2,
+        firstName: "Jane",
+        lastName: "",
+        profilePicture: "./images/profils/jane.webp",
+        messageLink: "#"
+    },
+    {
+        id: 3,
+        firstName: "Alice",
+        lastName: "Dubois",
+        profilePicture: "./images/profils/alice.webp",
+        messageLink: "#"
+    },
+    {
+        id: 4,
+        firstName: "Bob",
+        lastName: "",
+        profilePicture: "./images/profils/bob.webp",
+        messageLink: "#"
+    }
 ];
 
+// Sélection du conteneur où la liste d'amis sera affichée
 const sortableList = document.querySelector(".sortable-list");
+
+// Vérification que sortableList existe
+if (!sortableList) {
+    console.error("Le conteneur .sortable-list n'existe pas.");
+}
+
+// Sélection du champ de recherche
+const friendSearchInput = document.getElementById('friend-search');
+
 let draggedElement = null;
 let offsetY = 0; // Décalage Y pour alignement au point de contact
 
-// Fonction pour afficher la liste des amis
-function displayFriends() {
+// Fonction pour extraire les initiales du prénom et du nom
+function getInitials(firstName, lastName) {
+    const firstNameInitial = firstName ? firstName.charAt(0).toLowerCase() : '';
+    const lastNameInitial = lastName ? lastName.charAt(0).toLowerCase() : '';
+    return { firstNameInitial, lastNameInitial };
+}
+
+// Fonction pour afficher la liste des amis avec filtrage
+function displayFriends(filter = '') {
+    if (!sortableList) return; // Si sortableList n'existe pas, on arrête la fonction
+
     sortableList.innerHTML = ''; // Vide la liste avant de l'afficher
     friends.forEach(friend => {
-        // Crée un élément pour chaque ami
-        const friendElement = document.createElement('div');
-        friendElement.classList.add('friend', 'item'); // Ajoute la classe 'item' pour le tri
-        friendElement.dataset.id = friend.id; // Stocke l'ID de l'ami
+        const { firstNameInitial, lastNameInitial } = getInitials(friend.firstName, friend.lastName);
+        const filterLower = filter.toLowerCase();
 
-        friendElement.innerHTML = `
-            <div class="friend-info details">
-                <img src="${friend.profilePicture}" alt="Photo de ${friend.name}" class="friend-profile-pic">
-                <p>${friend.name}</p>
-            </div>
-        `;
+        // Vérifie si le filtre correspond à la première lettre du prénom ou du nom
+        if (filter === '' || firstNameInitial === filterLower || lastNameInitial === filterLower) {
+            // Crée un élément pour chaque ami
+            const friendElement = document.createElement('div');
+            friendElement.classList.add('friend', 'item'); // Ajoute la classe 'item' pour le tri
+            friendElement.dataset.id = friend.id; // Stocke l'ID de l'ami
 
-        sortableList.appendChild(friendElement);
+            // Construire le nom complet
+            const fullName = friend.firstName + (friend.lastName ? ' ' + friend.lastName : '');
 
-        // Ajoute les événements de glisser-déposer unifiés pour PC et mobile
-        addUnifiedDragEvents(friendElement);
+            friendElement.innerHTML = `
+                <div class="friend-info details">
+                    <img src="${friend.profilePicture}" alt="Photo de ${fullName}" class="friend-profile-pic">
+                    <p>${fullName}</p>
+                </div>
+                <a href="${friend.messageLink}" class="btn">Envoyer un message</a>
+            `;
+
+            sortableList.appendChild(friendElement);
+
+            // Ajoute les événements de glisser-déposer unifiés pour PC et mobile
+            addUnifiedDragEvents(friendElement);
+        }
     });
 }
 
 // Fonction pour ajouter les événements de glisser-déposer unifiés
 function addUnifiedDragEvents(friendElement) {
+    // Vérification que friendElement existe avant d'ajouter les événements
+    if (!friendElement) return;
+
     // Gestion du début du glissement (souris)
     friendElement.addEventListener("mousedown", (e) => {
+        // Si le clic est sur le bouton, ne pas initier le glissement
+        if (e.target.closest('.btn')) {
+            return;
+        }
         e.preventDefault();
         startDrag(e.clientY, friendElement);
         document.addEventListener("mousemove", onMouseMove);
@@ -45,10 +105,14 @@ function addUnifiedDragEvents(friendElement) {
 
     // Gestion du début du toucher (mobile)
     friendElement.addEventListener("touchstart", (e) => {
+        // Si le toucher est sur le bouton, ne pas initier le glissement
+        if (e.target.closest('.btn')) {
+            return;
+        }
         e.preventDefault();
         const touch = e.touches[0];
         startDrag(touch.clientY, friendElement);
-        document.addEventListener("touchmove", onTouchMove);
+        document.addEventListener("touchmove", onTouchMove, { passive: false });
         document.addEventListener("touchend", onTouchEnd);
     });
 
@@ -130,6 +194,12 @@ function getDragAfterElement(container, clientY) {
         return (offset < 0 && offset > closest.offset) ? { offset: offset, element: child } : closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
+
+// Écouteur d'événement pour le champ de recherche
+friendSearchInput.addEventListener('input', (event) => {
+    const searchValue = event.target.value.trim().toLowerCase();
+    displayFriends(searchValue);
+});
 
 // Affichage initial de la liste d'amis
 displayFriends();
