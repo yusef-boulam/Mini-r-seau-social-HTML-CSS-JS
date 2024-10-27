@@ -5,28 +5,28 @@ const friends = [
         firstName: "John",
         lastName: "Smith",
         profilePicture: "./images/profils/john.webp",
-        messageLink: "#"
+        messageLink: "conversation.html?friend=John" 
     },
     {
         id: 2,
         firstName: "Jane",
         lastName: "",
         profilePicture: "./images/profils/jane.webp",
-        messageLink: "#"
+        messageLink: "conversation.html?friend=Jane" 
     },
     {
         id: 3,
         firstName: "Alice",
         lastName: "Dubois",
         profilePicture: "./images/profils/alice.webp",
-        messageLink: "#"
+        messageLink: "conversation.html?friend=Alice"
     },
     {
         id: 4,
         firstName: "Bob",
         lastName: "",
         profilePicture: "./images/profils/bob.webp",
-        messageLink: "#"
+        messageLink: "conversation.html?friend=Bob"
     }
 ];
 
